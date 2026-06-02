@@ -112,6 +112,27 @@ export async function updatePasswordAction(
   return { error: null, success: true }
 }
 
+export async function updateProfileAction(
+  formData: FormData,
+): Promise<{ error: string | null; success: boolean }> {
+  const name = formData.get("name") as string
+
+  if (!name || !name.trim()) {
+    return { error: "Name is required", success: false }
+  }
+
+  const supabase = await createServerSupabase()
+
+  const { error } = await supabase.auth.updateUser({
+    data: { name: name.trim() },
+  })
+
+  if (error) return { error: error.message, success: false }
+
+  revalidatePath("/profile")
+  return { error: null, success: true }
+}
+
 export async function getUsersByIdsAction(
   userIds: string[],
 ): Promise<{ id: string; email: string }[]> {
