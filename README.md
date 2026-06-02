@@ -28,7 +28,7 @@ npm run dev
 
 ---
 
-## At a Glance
+## Features
 
 | Area | Tools |
 |------|-------|
