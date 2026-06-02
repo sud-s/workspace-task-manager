@@ -4,6 +4,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { useSupabase } from "@/providers/supabase-provider"
 import { getWorkspaces, getWorkspace } from "@/lib/queries"
 import { createWorkspace } from "@/lib/mutations"
+import { toast } from "sonner"
+
 export function useWorkspaces() {
   const supabase = useSupabase()
 
@@ -31,6 +33,10 @@ export function useCreateWorkspace() {
     mutationFn: (name: string) => createWorkspace(supabase, name),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["workspaces"] })
+      toast.success("Workspace created")
+    },
+    onError: (err) => {
+      toast.error(err instanceof Error ? err.message : "Failed to create workspace")
     },
   })
 }

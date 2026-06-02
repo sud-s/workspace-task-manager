@@ -4,6 +4,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { useSupabase } from "@/providers/supabase-provider"
 import { getProjects, getProject } from "@/lib/queries"
 import { createProject } from "@/lib/mutations"
+import { toast } from "sonner"
+
 export function useProjects(workspaceId: string) {
   const supabase = useSupabase()
 
@@ -38,6 +40,10 @@ export function useCreateProject() {
     }) => createProject(supabase, workspaceId, name),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["projects", data.workspace_id] })
+      toast.success("Project created")
+    },
+    onError: (err) => {
+      toast.error(err instanceof Error ? err.message : "Failed to create project")
     },
   })
 }

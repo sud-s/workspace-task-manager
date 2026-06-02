@@ -5,6 +5,8 @@ import { useSupabase } from "@/providers/supabase-provider"
 import { getWorkspaceMembers } from "@/lib/queries"
 import { inviteMember, removeMember } from "@/lib/mutations"
 import type { WorkspaceRole } from "@/lib/constants"
+import { toast } from "sonner"
+
 export function useWorkspaceMembers(workspaceId: string) {
   const supabase = useSupabase()
 
@@ -33,6 +35,10 @@ export function useInviteMember() {
       queryClient.invalidateQueries({
         queryKey: ["workspace-members", variables.workspaceId],
       })
+      toast.success("Member invited")
+    },
+    onError: (err) => {
+      toast.error(err instanceof Error ? err.message : "Failed to invite member")
     },
   })
 }
@@ -53,6 +59,10 @@ export function useRemoveMember() {
       queryClient.invalidateQueries({
         queryKey: ["workspace-members", variables.workspaceId],
       })
+      toast.success("Member removed")
+    },
+    onError: (err) => {
+      toast.error(err instanceof Error ? err.message : "Failed to remove member")
     },
   })
 }

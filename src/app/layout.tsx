@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
+import { Toaster } from "sonner"
 import { QueryProvider } from "@/providers/query-provider"
 import { SupabaseProvider } from "@/providers/supabase-provider"
 
@@ -52,6 +53,16 @@ export default function RootLayout({
         <QueryProvider>
           <SupabaseProvider>
             {children}
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                style: {
+                  background: "hsl(240 10% 6%)",
+                  border: "1px solid hsl(240 4% 16%)",
+                  color: "hsl(0 0% 98%)",
+                },
+              }}
+            />
           </SupabaseProvider>
         </QueryProvider>
       </body>

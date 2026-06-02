@@ -7,6 +7,8 @@ import { createTask, updateTask, deleteTask, updateTaskStatus } from "@/lib/muta
 import type { TaskFilters, TaskRow } from "@/lib/queries"
 import type { CreateTaskData, UpdateTaskData } from "@/lib/mutations"
 import type { TaskStatus } from "@/lib/constants"
+import { toast } from "sonner"
+
 export function useTasks(projectId: string, filters?: TaskFilters) {
   const supabase = useSupabase()
 
@@ -41,6 +43,10 @@ export function useCreateTask() {
     }) => createTask(supabase, projectId, data),
     onSuccess: (task) => {
       queryClient.invalidateQueries({ queryKey: ["tasks", task.project_id] })
+      toast.success("Task created")
+    },
+    onError: (err) => {
+      toast.error(err instanceof Error ? err.message : "Failed to create task")
     },
   })
 }
@@ -55,6 +61,10 @@ export function useUpdateTask() {
     onSuccess: (task) => {
       queryClient.invalidateQueries({ queryKey: ["tasks", task.project_id] })
       queryClient.invalidateQueries({ queryKey: ["task", task.id] })
+      toast.success("Task updated")
+    },
+    onError: (err) => {
+      toast.error(err instanceof Error ? err.message : "Failed to update task")
     },
   })
 }
@@ -73,6 +83,10 @@ export function useDeleteTask() {
     }) => deleteTask(supabase, taskId).then(() => ({ pid })),
     onSuccess: ({ pid }) => {
       queryClient.invalidateQueries({ queryKey: ["tasks", pid] })
+      toast.success("Task deleted")
+    },
+    onError: (err) => {
+      toast.error(err instanceof Error ? err.message : "Failed to delete task")
     },
   })
 }
@@ -103,13 +117,14 @@ export function useUpdateTaskStatus() {
       return { previousTasks }
     },
 
-    onError: (_err, variables, context) => {
+    onError: (err, variables, context) => {
       if (context?.previousTasks) {
         queryClient.setQueryData(
           ["tasks", variables.projectId],
           context.previousTasks,
         )
       }
+      toast.error("Failed to update task status")
     },
 
     onSettled: (_data, _error, variables) => {
