@@ -1,7 +1,7 @@
 "use client"
 
 import { useParams, useRouter } from "next/navigation"
-import { Check, ChevronsUpDown, Layers } from "lucide-react"
+import { Check, ChevronsUpDown, Layers, Plus } from "lucide-react"
 import { useWorkspaces } from "@/hooks/use-workspaces"
 import { useWorkspaceStore } from "@/stores/workspace-store"
 import { cn } from "@/lib/utils"
@@ -81,7 +81,12 @@ export function WorkspaceSwitcher() {
               </button>
             ))}
             <div className="border-t border-zinc-800 pt-2 mt-2">
-              <CreateWorkspaceDialog />
+              <CreateWorkspaceDialog>
+                <button className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-zinc-400 transition-colors hover:bg-zinc-800/50 hover:text-zinc-200">
+                  <Plus className="h-4 w-4" />
+                  New Workspace
+                </button>
+              </CreateWorkspaceDialog>
             </div>
           </div>
         </PopoverContent>

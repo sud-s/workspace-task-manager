@@ -132,7 +132,12 @@ export function Sidebar() {
       </nav>
 
       <div className="border-t border-zinc-800/50 p-3">
-        <CreateWorkspaceDialog />
+        <CreateWorkspaceDialog>
+          <button className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-400 transition-all hover:bg-zinc-800/60 hover:text-white">
+            <Plus className="h-4 w-4" />
+            New Workspace
+          </button>
+        </CreateWorkspaceDialog>
       </div>
     </aside>
   )
