@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: gize-backend
+    repo: https://github.com/sud-s/workspace-task-manager
+    branch: main
+    rootDir: backend
+    env: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        value: https://bfnynfufkrybpffjtunm.supabase.co
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmbnluZnVma3J5YnBmZmp0dW5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAzOTQ0MjIsImV4cCI6MjA5NTk3MDQyMn0.qHlnI4yO2WeymzUroaCqWw5tlBsmw2Q7wLaVa2bLh-U
