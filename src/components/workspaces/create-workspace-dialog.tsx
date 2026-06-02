@@ -37,6 +37,7 @@ export function CreateWorkspaceDialog({ children }: CreateWorkspaceDialogProps) 
       setOpen(false)
       router.push(`/${workspace.id}`)
     } catch {
+      // toast is handled by the mutation onError
     }
   }
 
