@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { toast } from "sonner"
 
 type CreateProjectDialogProps = {
   workspaceId: string
@@ -26,7 +27,11 @@ export function CreateProjectDialog({ workspaceId, children }: CreateProjectDial
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!name.trim() || !workspaceId) return
+    if (!name.trim()) return
+    if (!workspaceId) {
+      toast.error("Please select or create a workspace first")
+      return
+    }
 
     try {
       await createProject.mutateAsync({ workspaceId, name: name.trim() })
@@ -69,7 +74,7 @@ export function CreateProjectDialog({ workspaceId, children }: CreateProjectDial
           <Button
             type="submit"
             className="w-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 disabled:opacity-50"
-            disabled={!name.trim() || createProject.isPending || !workspaceId}
+            disabled={!name.trim() || createProject.isPending}
           >
             {createProject.isPending ? "Creating..." : "Create Project"}
           </Button>
