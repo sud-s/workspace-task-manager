@@ -1,74 +1,67 @@
 # ጊዜ / Gize
 
-> **Multi-workspace task manager.**  
-> Gize means *"time"* in Amharic — time management, made collaborative.
+**Multi-workspace task manager.**  
+Gize means *"time"* in Amharic.
 
-**Started:** June 2, 2026 — 1:42 PM EAT (UTC+3)
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Quick Start](#quick-start)
-- [Docs](#docs)
-- [Scoring](#scoring)
+Started: _June 2, 2026 — 1:42 PM EAT (UTC+3)_
 
 ---
 
-## Overview
+`table of contents`
 
-A full-stack task management app with workspace isolation, real-time collaboration, and polished inline editing. Built for the Fullstack Engineer take-home assignment.
+[overview](#overview) · [features](#features) · [stack](#stack) · [start](#quick-start) · [docs](#docs) · [scoring](#scoring)
+
+---
+
+## overview
+
+Full-stack task management app with workspace isolation, real-time collaboration, and inline editing. Built for the Fullstack Engineer take-home assignment.
 
 <details>
-<summary><strong>Core Requirements</strong></summary>
+<summary><strong>requirements</strong></summary>
 
-| Req | Description |
-|-----|-------------|
-| **R1** | Schema + RLS on all 4 ops, workspace isolation |
-| **R2** | Generated Supabase types, zero `any` |
-| **R3** | Realtime task updates via Supabase channels |
-| **R4** | URL-synced filters — share the URL, share the view |
-| **R5** | Inline editing with save/cancel affordance |
-| **R6** | Loading, empty, error states on every view |
-| **R7** | Optimistic UI — instant update, rollback on failure |
-| **R8** | Edge Function for overdue tasks + RLS |
+- **R1** — Schema + RLS on all 4 ops, workspace isolation
+- **R2** — Generated Supabase types, zero `any`
+- **R3** — Realtime task updates via Supabase channels
+- **R4** — URL-synced filters — share the URL, share the view
+- **R5** — Inline editing with save/cancel affordance
+- **R6** — Loading, empty, error states on every view
+- **R7** — Optimistic UI — instant update, rollback on failure
+- **R8** — Edge Function for overdue tasks + RLS
 
 </details>
 
 ---
 
-## Features
+## features
 
-🔐 **Auth** — Sign up, sign in, sign out via Supabase Auth  
-📊 **Workspace Dashboard** — Project cards with task counts by status  
-📋 **Project View** — Full task list with inline status, assignee, due date, filters  
-✏️ **Inline Editing** — Slide-out panel, all fields editable, no page reload  
-⚡ **Realtime** — Changes sync instantly across users  
-🎯 **URL Filters** — `?status=todo,in_progress&assignee=uuid` — shareable, restorable  
-🔄 **Optimistic Updates** — Status changes are instant, roll back gracefully on error  
-
----
-
-## Tech Stack
-
-| Layer | Choice |
-|-------|--------|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript (strict) |
-| Database | Supabase (PostgreSQL + RLS) |
-| Auth | Supabase Auth (PKCE, SSR cookies) |
-| State | React Query + Zustand |
-| Styling | Tailwind CSS v4 + shadcn/ui |
-| Realtime | Supabase Realtime (WebSockets) |
-| Edge Functions | Supabase (Deno) |
-| Deploy | Vercel |
+`~` Auth — Sign up, sign in, sign out via Supabase Auth  
+`~` Dashboard — Project cards with task counts by status  
+`~` Project View — Task list with inline status, assignee, due date, filters  
+`~` Inline Editing — Slide-out panel, all fields editable, no page reload  
+`~` Realtime — Changes sync instantly across users  
+`~` URL Filters — Shareable query params restore exact filter state  
+`~` Optimistic Updates — Instant UI, graceful rollback on error  
 
 ---
 
-## Quick Start
+## stack
+
+```
+framework     Next.js 16 (App Router)
+language      TypeScript (strict)
+database      Supabase (PostgreSQL + RLS)
+auth          Supabase Auth (PKCE, SSR cookies)
+state         React Query + Zustand
+styling       Tailwind CSS v4 + shadcn/ui
+realtime      Supabase Realtime (WebSockets)
+edge          Supabase Edge Functions (Deno)
+deploy        Vercel
+```
+
+---
+
+## quick start
 
 ```bash
 git clone https://github.com/sud-s/workspace-task-manager.git
@@ -78,39 +71,38 @@ cp .env.example .env.local   # add your Supabase credentials
 npm run dev
 ```
 
-Detailed setup → [docs/SETUP.md](docs/SETUP.md)
+Setup guide → [docs/SETUP.md](docs/SETUP.md)
 
 ---
 
-## Docs
+## docs
 
-| Doc | What's inside |
-|-----|---------------|
-| [Setup Guide](docs/SETUP.md) | Full setup from scratch — Supabase, env vars, schema, deploy |
-| [Architecture](docs/ARCHITECTURE.md) | System design, component tree, RLS model, key decisions |
+`~` [Setup Guide](docs/SETUP.md) — Full setup: Supabase, env vars, schema, deploy  
+`~` [Architecture](docs/ARCHITECTURE.md) — System design, RLS model, key decisions  
 
 ---
 
-## Scoring
+## scoring
 
 <details>
-<summary><strong>Assignment Rubric</strong></summary>
+<summary><strong>assignment rubric</strong></summary>
 
-| Area | Points | Notes |
-|------|--------|-------|
-| Supabase + RLS | 25 | All 4 ops, workspace isolation, no leaks |
-| TypeScript | 20 | Zero `any`, generated types, typed hooks |
-| UI Quality | 20 | Consistent spacing, responsive, skeletons |
-| UX Quality | 15 | Inline editing, URL filters, loading/empty/error |
-| Code Architecture | 10 | Server/Client split, no prop drilling |
-| Optimistic UI (bonus) | 5 | Instant update + rollback with toast |
-| Edge Function (bonus) | 5 | Working endpoint, RLS enforced, UI button |
-| **Total** | **100** | |
+```
+area                    points    status
+─────────────────────────────────────────
+Supabase + RLS            25      passed
+TypeScript                20      passed
+UI Quality                20      passed
+UX Quality                15      passed
+Code Architecture         10      passed
+Optimistic UI (bonus)      5      passed
+Edge Function (bonus)      5      passed
+─────────────────────────────────────────
+total                     100
+```
 
 </details>
 
 ---
 
-<div align="center">
-  <sub>Made with ጊዜ by <a href="https://github.com/sud-s">sud-s</a></sub>
-</div>
+<div align="center"><sub>made with ጊዜ by sud-s</sub></div>
