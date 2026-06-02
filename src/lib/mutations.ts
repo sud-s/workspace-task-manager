@@ -29,8 +29,9 @@ export async function createWorkspace(
   })
 
   if (error) throw new Error(error.message)
-  if (!data) throw new Error("Failed to create workspace")
-  return data as unknown as WorkspaceRow
+  const workspaces = data as WorkspaceRow[] | null
+  if (!workspaces || workspaces.length === 0) throw new Error("Failed to create workspace")
+  return workspaces[0]
 }
 
 export async function createProject(

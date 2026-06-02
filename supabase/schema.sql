@@ -231,7 +231,7 @@ CREATE POLICY "Members can delete tasks"
 -- ============================================================
 
 CREATE OR REPLACE FUNCTION public.create_workspace(workspace_name text)
-RETURNS json
+RETURNS SETOF public.workspaces
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = ''
@@ -248,7 +248,8 @@ BEGIN
     RETURNING * INTO new_workspace;
   INSERT INTO public.workspace_members (workspace_id, user_id, role)
     VALUES (new_workspace.id, user_id, 'owner');
-  RETURN row_to_json(new_workspace)::json;
+  RETURN NEXT new_workspace;
+  RETURN;
 END;
 $$;
 
