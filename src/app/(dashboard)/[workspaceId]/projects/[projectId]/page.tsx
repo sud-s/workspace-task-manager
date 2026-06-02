@@ -6,11 +6,15 @@ import { useQuery } from "@tanstack/react-query"
 import { useSupabase } from "@/providers/supabase-provider"
 import { getProject } from "@/lib/queries"
 import { TaskList } from "@/components/tasks/task-list"
-import { TaskFilters } from "@/components/tasks/task-filters"
+import { TaskBoard } from "@/components/tasks/task-board"
+import { TaskCalendar } from "@/components/tasks/task-calendar"
 import { TaskDetailPanel } from "@/components/tasks/task-detail-panel"
+import { TaskFilters } from "@/components/tasks/task-filters"
 import { CreateTaskDialog } from "@/components/tasks/create-task-dialog"
 import { OverdueTasksButton } from "@/components/tasks/overdue-tasks-button"
 import { Skeleton } from "@/components/ui/skeleton"
+import { Button } from "@/components/ui/button"
+import { List, Columns3, CalendarDays } from "lucide-react"
 import type { TaskFilters as TaskFiltersType } from "@/lib/queries"
 import type { TaskStatus } from "@/lib/constants"
 
@@ -23,6 +27,13 @@ export default function ProjectPage({ params }: PageProps) {
   const supabase = useSupabase()
   const searchParams = useSearchParams()
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null)
+  const [view, setView] = useState<"list" | "board" | "calendar">("list")
+
+  const VIEW_OPTIONS = [
+    { value: "list", label: "List", icon: List },
+    { value: "board", label: "Board", icon: Columns3 },
+    { value: "calendar", label: "Calendar", icon: CalendarDays },
+  ] as const
 
   const { data: project, isLoading: projectLoading } = useQuery({
     queryKey: ["project", projectId],
@@ -61,6 +72,24 @@ export default function ProjectPage({ params }: PageProps) {
           )}
         </div>
         <div className="flex items-center gap-2">
+          <div className="flex items-center rounded-lg border border-border bg-card p-0.5">
+            {VIEW_OPTIONS.map(({ value, label, icon: Icon }) => (
+              <Button
+                key={value}
+                variant="ghost"
+                size="sm"
+                onClick={() => setView(value)}
+                className={`h-8 px-2.5 text-xs gap-1.5 ${
+                  view === value
+                    ? "bg-accent text-accent-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-card-foreground"
+                }`}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">{label}</span>
+              </Button>
+            ))}
+          </div>
           <OverdueTasksButton projectId={projectId} />
           <CreateTaskDialog projectId={projectId} workspaceId={workspaceId} />
         </div>
@@ -70,19 +99,39 @@ export default function ProjectPage({ params }: PageProps) {
 
       <TaskFilters workspaceId={workspaceId} />
 
-      <TaskList
-        projectId={projectId}
-        workspaceId={workspaceId}
-        filters={filters}
-        onTaskClick={setSelectedTaskId}
-      />
+      {view === "list" && (
+        <TaskList
+          projectId={projectId}
+          workspaceId={workspaceId}
+          filters={filters}
+          onTaskClick={setSelectedTaskId}
+        />
+      )}
 
-      <TaskDetailPanel
-        taskId={selectedTaskId}
-        workspaceId={workspaceId}
-        projectId={projectId}
-        onClose={handleClosePanel}
-      />
+      {view === "board" && (
+        <TaskBoard
+          projectId={projectId}
+          workspaceId={workspaceId}
+          filters={filters}
+        />
+      )}
+
+      {view === "calendar" && (
+        <TaskCalendar
+          projectId={projectId}
+          workspaceId={workspaceId}
+          filters={filters}
+        />
+      )}
+
+      {view === "list" && (
+        <TaskDetailPanel
+          taskId={selectedTaskId}
+          workspaceId={workspaceId}
+          projectId={projectId}
+          onClose={handleClosePanel}
+        />
+      )}
     </div>
   )
 }

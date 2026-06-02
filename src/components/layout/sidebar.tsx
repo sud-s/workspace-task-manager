@@ -11,6 +11,7 @@ import { CreateProjectDialog } from "@/components/projects/create-project-dialog
 import { useWorkspaceStore } from "@/stores/workspace-store"
 import { useProjects } from "@/hooks/use-projects"
 import { Skeleton } from "@/components/ui/skeleton"
+import { ThemeToggle } from "./theme-toggle"
 
 export function Sidebar() {
   const pathname = usePathname()
@@ -131,13 +132,14 @@ export function Sidebar() {
         </Link>
       </nav>
 
-      <div className="border-t border-zinc-800/50 p-3">
+      <div className="border-t border-zinc-800/50 p-3 flex items-center gap-2">
         <CreateWorkspaceDialog>
-          <button className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-400 transition-all hover:bg-zinc-800/60 hover:text-white">
+          <button className="flex flex-1 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-400 transition-all hover:bg-zinc-800/60 hover:text-white">
             <Plus className="h-4 w-4" />
             New Workspace
           </button>
         </CreateWorkspaceDialog>
+        <ThemeToggle />
       </div>
     </aside>
   )

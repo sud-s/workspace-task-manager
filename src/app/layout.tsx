@@ -4,6 +4,7 @@ import "./globals.css"
 import { Toaster } from "sonner"
 import { QueryProvider } from "@/providers/query-provider"
 import { SupabaseProvider } from "@/providers/supabase-provider"
+import { ThemeProvider } from "@/providers/theme-provider"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,21 +49,23 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full">
         <QueryProvider>
           <SupabaseProvider>
-            {children}
-            <Toaster
-              position="bottom-right"
-              toastOptions={{
-                style: {
-                  background: "hsl(240 10% 6%)",
-                  border: "1px solid hsl(240 4% 16%)",
-                  color: "hsl(0 0% 98%)",
-                },
-              }}
-            />
+            <ThemeProvider>
+              {children}
+              <Toaster
+                position="bottom-right"
+                toastOptions={{
+                  style: {
+                    background: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    color: "hsl(var(--foreground))",
+                  },
+                }}
+              />
+            </ThemeProvider>
           </SupabaseProvider>
         </QueryProvider>
       </body>
