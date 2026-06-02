@@ -21,19 +21,21 @@ export interface UpdateTaskData {
 type QueryClient = SupabaseClient<Database>
 
 export async function createWorkspace(
-  client: QueryClient,
   name: string,
 ): Promise<WorkspaceRow> {
-  const { data, error } = await client
-    .from("workspaces")
-    .insert({ name })
-    .select("*")
-    .single()
+  const res = await fetch("/api/workspaces", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name }),
+  })
 
-  if (error) throw new Error(error.message)
-  if (!data) throw new Error("Failed to create workspace")
+  const json = await res.json()
 
-  return data
+  if (!res.ok) {
+    throw new Error(json.error ?? "Failed to create workspace")
+  }
+
+  return json.workspace
 }
 
 export async function createProject(

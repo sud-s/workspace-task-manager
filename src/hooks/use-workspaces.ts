@@ -28,11 +28,10 @@ export function useWorkspace(id: string): UseQueryResult<WorkspaceRow | null> {
 }
 
 export function useCreateWorkspace(): UseMutationResult<WorkspaceRow, Error, string> {
-  const supabase = useSupabase()
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (name: string) => createWorkspace(supabase, name),
+    mutationFn: (name: string) => createWorkspace(name),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["workspaces"] })
       toast.success("Workspace created")
