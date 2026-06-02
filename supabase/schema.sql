@@ -253,29 +253,9 @@ BEGIN
 END;
 $$;
 
--- ============================================================
--- TRIGGER: auto-add creator as owner on workspace creation
--- ============================================================
-
-CREATE OR REPLACE FUNCTION public.handle_new_workspace()
-RETURNS TRIGGER
-LANGUAGE plpgsql
-SECURITY DEFINER
-SET search_path = ''
-AS $$
-BEGIN
-  IF auth.uid() IS NOT NULL THEN
-    INSERT INTO public.workspace_members (workspace_id, user_id, role)
-    VALUES (NEW.id, auth.uid(), 'owner');
-  END IF;
-  RETURN NEW;
-END;
-$$;
-
-CREATE TRIGGER on_workspace_created
-  AFTER INSERT ON public.workspaces
-  FOR EACH ROW
-  EXECUTE FUNCTION public.handle_new_workspace();
+-- Trigger removed in favor of create_workspace RPC function.
+-- The RPC handles workspace + member creation in one SECURITY DEFINER call,
+-- avoiding the chicken-and-egg problem with RLS on workspace_members INSERT.
 
 -- ============================================================
 -- INDEXES
