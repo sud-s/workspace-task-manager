@@ -10,12 +10,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) {
+      return NextResponse.json({ error: "No session" }, { status: 401 })
+    }
+
     const { name } = await request.json()
     if (!name || typeof name !== "string") {
       return NextResponse.json({ error: "name is required" }, { status: 400 })
     }
 
     const admin = createAdminSupabase()
+    await admin.auth.setSession({
+      access_token: session.access_token,
+      refresh_token: session.refresh_token,
+    })
 
     const { data: workspace, error: wsError } = await admin
       .from("workspaces")
