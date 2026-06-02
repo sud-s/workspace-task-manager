@@ -1,3 +1,5 @@
+<div align="center">
+
 [![Gize](media/banner.svg)](media/banner.svg)
 
 [![TypeScript](https://img.shields.io/badge/typescript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -6,13 +8,23 @@
 [![Vercel](https://img.shields.io/badge/vercel-deploy-000?logo=vercel&logoColor=white)](https://vercel.com)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
+</div>
+
+<div align="center">
+
 [Quick Start](#quick-start) • [Docs](docs/SETUP.md) • [Architecture](docs/ARCHITECTURE.md) • [Scoring](#scoring)
 
+</div>
+
 ---
+
+<div align="center">
 
 **Multi-workspace task manager.**  
 Supabase RLS, real-time collaboration, and inline editing.  
 Gize means *"time"* in Amharic.
+
+</div>
 
 ---
 
@@ -68,8 +80,10 @@ npm run dev
 
 ---
 
+<div align="center">
+
 **Started:** June 2, 2026 — 1:42 PM EAT (UTC+3)
 
----
+<sub>MIT © sud-s</sub>
 
-<div align="center"><sub>MIT © sud-s</sub></div>
+</div>
