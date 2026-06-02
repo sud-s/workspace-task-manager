@@ -1,0 +1,23 @@
+# Auto-label rules
+"frontend":
+  - src/app/**/*
+  - src/components/**/*
+  - src/hooks/**/*
+
+"backend":
+  - backend/**/*
+  - supabase/**/*
+
+"infra":
+  - .github/**/*
+  - Dockerfile
+  - render.yaml
+
+"dependencies":
+  - package.json
+  - package-lock.json
+  - backend/package.json
+
+"docs":
+  - "*.md"
+  - assets/*
