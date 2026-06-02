@@ -129,8 +129,12 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 - Route protection via proxy
 
 ### UI / UX
-- Dark & light theme toggle
-- Glass/emerald design with 3D card effects
+- Dark & light theme toggle with persistent preference
+- Full theme-aware design — all components use semantic tokens, no hardcoded colors
+- Responsive mobile layout with hamburger sidebar drawer and overlay backdrop
+- Kanban board scrolls horizontally with snap points on mobile
+- Calendar view with responsive grid and dot indicators
+- Glass/emerald design with 3D card tilt effects
 - Toast notifications for all mutations
 - Loading skeletons and error boundaries
 
