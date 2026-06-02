@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation"
 import { useWorkspace } from "@/hooks/use-workspaces"
 import { useProjects } from "@/hooks/use-projects"
+import { useRealtimeProjects } from "@/hooks/use-realtime-projects"
 import { useWorkspaceStore } from "@/stores/workspace-store"
 import { useEffect } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -17,6 +18,8 @@ export default function WorkspaceDashboardPage() {
 
   const { data: workspace, isLoading: wsLoading, isError: wsError } = useWorkspace(workspaceId)
   const { data: projects, isLoading: projLoading } = useProjects(workspaceId)
+
+  useRealtimeProjects(workspaceId)
 
   useEffect(() => {
     if (workspaceId) {

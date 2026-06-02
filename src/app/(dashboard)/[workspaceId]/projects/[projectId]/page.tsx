@@ -80,6 +80,7 @@ export default function ProjectPage({ params }: PageProps) {
       <TaskDetailPanel
         taskId={selectedTaskId}
         workspaceId={workspaceId}
+        projectId={projectId}
         onClose={handleClosePanel}
       />
     </div>

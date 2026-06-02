@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 import { useTask, useUpdateTask } from "@/hooks/use-tasks"
 import { useWorkspaceMembers } from "@/hooks/use-members"
 import {
@@ -18,22 +19,32 @@ import { Textarea } from "@/components/ui/textarea"
 import { TaskStatusSelect } from "./task-status-select"
 import { Skeleton } from "@/components/ui/skeleton"
 import { formatDate } from "@/lib/utils"
+import type { TaskRow } from "@/lib/queries"
 import type { TaskStatus } from "@/lib/constants"
 
 type TaskDetailPanelProps = {
   taskId: string | null
   workspaceId: string
+  projectId: string
   onClose: () => void
 }
 
-export function TaskDetailPanel({ taskId, workspaceId, onClose }: TaskDetailPanelProps) {
-  const { data: task, isLoading, error } = useTask(taskId ?? "")
+export function TaskDetailPanel({ taskId, workspaceId, projectId, onClose }: TaskDetailPanelProps) {
+  const queryClient = useQueryClient()
+
+  const cachedTask = taskId
+    ? queryClient.getQueryData<TaskRow[]>(["tasks", projectId])?.find((t) => t.id === taskId) ?? null
+    : null
+
+  const { data: fetchedTask, isLoading, error } = useTask(taskId ?? "")
+
+  const task = cachedTask ?? fetchedTask ?? null
   const { data: members } = useWorkspaceMembers(workspaceId)
 
   return (
     <Sheet open={!!taskId} onOpenChange={(open) => { if (!open) onClose() }}>
       <SheetContent key={taskId ?? "closed"} className="overflow-y-auto border-l border-zinc-800/60 bg-zinc-950/95 backdrop-blur-xl">
-        {isLoading && (
+        {isLoading && !cachedTask && (
           <div className="space-y-4 pt-6">
             <Skeleton className="h-7 w-3/4 bg-zinc-800/50" />
             <Skeleton className="h-24 w-full bg-zinc-800/50" />
@@ -67,16 +78,7 @@ export function TaskDetailPanel({ taskId, workspaceId, onClose }: TaskDetailPane
 }
 
 type TaskDetailFormProps = {
-  task: {
-    id: string
-    project_id: string
-    title: string
-    description: string
-    status: TaskStatus
-    assignee_id: string | null
-    due_date: string | null
-    created_at: string
-  }
+  task: TaskRow
   members?: Array<{ user_id: string; role: string }>
 }
 
