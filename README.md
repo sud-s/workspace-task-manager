@@ -20,6 +20,10 @@
     <a href="#-quick-start">Quick Start</a> •
     <a href="#-architecture">Architecture</a>
   </p>
+
+  <p>
+    <strong>Started:</strong> June 2, 2026 — 1:42 PM EAT (UTC+3)
+  </p>
 </div>
 
 ---
