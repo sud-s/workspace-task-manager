@@ -1,108 +1,75 @@
-# ጊዜ / Gize
+[![Gize](media/banner.svg)](media/banner.svg)
+
+[![TypeScript](https://img.shields.io/badge/typescript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Next.js](https://img.shields.io/badge/next.js-16-000?logo=next.js&logoColor=white)](https://nextjs.org)
+[![Supabase](https://img.shields.io/badge/supabase-rls-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com)
+[![Vercel](https://img.shields.io/badge/vercel-deploy-000?logo=vercel&logoColor=white)](https://vercel.com)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+[Quick Start](#quick-start) • [Docs](docs/SETUP.md) • [Architecture](docs/ARCHITECTURE.md) • [Scoring](#scoring)
+
+---
 
 **Multi-workspace task manager.**  
+Supabase RLS, real-time collaboration, and inline editing.  
 Gize means *"time"* in Amharic.
 
-Started: _June 2, 2026 — 1:42 PM EAT (UTC+3)_
-
 ---
 
-`table of contents`
-
-[overview](#overview) · [features](#features) · [stack](#stack) · [start](#quick-start) · [docs](#docs) · [scoring](#scoring)
-
----
-
-## overview
-
-Full-stack task management app with workspace isolation, real-time collaboration, and inline editing. Built for the Fullstack Engineer take-home assignment.
-
-<details>
-<summary><strong>requirements</strong></summary>
-
-- **R1** — Schema + RLS on all 4 ops, workspace isolation
-- **R2** — Generated Supabase types, zero `any`
-- **R3** — Realtime task updates via Supabase channels
-- **R4** — URL-synced filters — share the URL, share the view
-- **R5** — Inline editing with save/cancel affordance
-- **R6** — Loading, empty, error states on every view
-- **R7** — Optimistic UI — instant update, rollback on failure
-- **R8** — Edge Function for overdue tasks + RLS
-
-</details>
-
----
-
-## features
-
-`~` Auth — Sign up, sign in, sign out via Supabase Auth  
-`~` Dashboard — Project cards with task counts by status  
-`~` Project View — Task list with inline status, assignee, due date, filters  
-`~` Inline Editing — Slide-out panel, all fields editable, no page reload  
-`~` Realtime — Changes sync instantly across users  
-`~` URL Filters — Shareable query params restore exact filter state  
-`~` Optimistic Updates — Instant UI, graceful rollback on error  
-
----
-
-## stack
-
-```
-framework     Next.js 16 (App Router)
-language      TypeScript (strict)
-database      Supabase (PostgreSQL + RLS)
-auth          Supabase Auth (PKCE, SSR cookies)
-state         React Query + Zustand
-styling       Tailwind CSS v4 + shadcn/ui
-realtime      Supabase Realtime (WebSockets)
-edge          Supabase Edge Functions (Deno)
-deploy        Vercel
-```
-
----
-
-## quick start
+## Quick Start
 
 ```bash
 git clone https://github.com/sud-s/workspace-task-manager.git
 cd workspace-task-manager
 npm install
-cp .env.example .env.local   # add your Supabase credentials
+cp .env.example .env.local
 npm run dev
 ```
 
-Setup guide → [docs/SETUP.md](docs/SETUP.md)
+---
+
+## At a Glance
+
+| Area | Tools |
+|------|-------|
+| Auth | Supabase Auth — PKCE, email/password, SSR cookies |
+| Database | PostgreSQL + RLS — workspace isolation on all 4 ops |
+| Realtime | Supabase Realtime — task updates via WebSocket |
+| Edge | Edge Function — overdue tasks with RLS enforcement |
+| State | React Query + Zustand — optimistic updates, no `any` |
+| UI | Tailwind v4 + shadcn/ui — skeletons, inline editing, URL filters |
 
 ---
 
-## docs
+## Docs
 
-`~` [Setup Guide](docs/SETUP.md) — Full setup: Supabase, env vars, schema, deploy  
-`~` [Architecture](docs/ARCHITECTURE.md) — System design, RLS model, key decisions  
+[`~` Setup Guide](docs/SETUP.md) — Full setup: Supabase, env vars, schema, deploy  
+[`~` Architecture](docs/ARCHITECTURE.md) — System design, RLS model, key decisions  
 
 ---
 
-## scoring
+## Scoring
 
 <details>
-<summary><strong>assignment rubric</strong></summary>
+<summary>assignment rubric</summary>
 
-```
-area                    points    status
-─────────────────────────────────────────
-Supabase + RLS            25      passed
-TypeScript                20      passed
-UI Quality                20      passed
-UX Quality                15      passed
-Code Architecture         10      passed
-Optimistic UI (bonus)      5      passed
-Edge Function (bonus)      5      passed
-─────────────────────────────────────────
-total                     100
-```
+| Area | Points | Status |
+|------|--------|--------|
+| Supabase + RLS | 25 | ✅ |
+| TypeScript | 20 | ✅ |
+| UI Quality | 20 | ✅ |
+| UX Quality | 15 | ✅ |
+| Code Architecture | 10 | ✅ |
+| Optimistic UI (bonus) | 5 | ✅ |
+| Edge Function (bonus) | 5 | ✅ |
+| **Total** | **100** | ✅ |
 
 </details>
 
 ---
 
-<div align="center"><sub>made with ጊዜ by sud-s</sub></div>
+**Started:** June 2, 2026 — 1:42 PM EAT (UTC+3)
+
+---
+
+<div align="center"><sub>MIT © sud-s</sub></div>
