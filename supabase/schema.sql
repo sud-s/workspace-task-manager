@@ -115,10 +115,10 @@ CREATE POLICY "Owners can invite members"
   TO authenticated
   WITH CHECK (
     EXISTS (
-      SELECT 1 FROM public.workspace_members
-      WHERE workspace_id = workspace_members.workspace_id
-        AND user_id = auth.uid()
-        AND role = 'owner'
+      SELECT 1 FROM public.workspace_members owner
+      WHERE owner.workspace_id = workspace_members.workspace_id
+        AND owner.user_id = auth.uid()
+        AND owner.role = 'owner'
     )
   );
 
@@ -130,8 +130,8 @@ CREATE POLICY "Users can join as owner on creation"
     user_id = auth.uid()
     AND role = 'owner'
     AND NOT EXISTS (
-      SELECT 1 FROM public.workspace_members
-      WHERE workspace_id = workspace_members.workspace_id
+      SELECT 1 FROM public.workspace_members existing
+      WHERE existing.workspace_id = workspace_members.workspace_id
     )
   );
 

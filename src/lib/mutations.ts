@@ -24,15 +24,13 @@ export async function createWorkspace(
   client: QueryClient,
   name: string,
 ): Promise<WorkspaceRow> {
-  const { data, error } = await client
-    .from("workspaces")
-    .insert({ name })
-    .select("*")
-    .single()
+  const { data, error } = await client.rpc("create_workspace", {
+    workspace_name: name,
+  })
 
   if (error) throw new Error(error.message)
   if (!data) throw new Error("Failed to create workspace")
-  return data
+  return data as unknown as WorkspaceRow
 }
 
 export async function createProject(
