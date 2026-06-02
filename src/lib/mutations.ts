@@ -24,10 +24,6 @@ export async function createWorkspace(
   client: QueryClient,
   name: string,
 ): Promise<WorkspaceRow> {
-  const { data: userData, error: userError } = await client.auth.getUser()
-  if (userError) throw new Error(userError.message)
-  if (!userData.user) throw new Error("Not authenticated")
-
   const { data, error } = await client
     .from("workspaces")
     .insert({ name })
@@ -36,15 +32,6 @@ export async function createWorkspace(
 
   if (error) throw new Error(error.message)
   if (!data) throw new Error("Failed to create workspace")
-
-  const { error: memberError } = await client
-    .from("workspace_members")
-    .upsert(
-      { workspace_id: data.id, user_id: userData.user.id, role: "owner" },
-      { onConflict: "workspace_id,user_id", ignoreDuplicates: true },
-    )
-
-  if (memberError) throw new Error(memberError.message)
 
   return data
 }
