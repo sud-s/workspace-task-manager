@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { createServerSupabase } from "@/lib/supabase/server"
-import { WorkspaceWelcome } from "@/components/workspaces/workspace-welcome"
 import {
   Layers,
   FolderKanban,
@@ -24,7 +23,7 @@ export default async function HomePage() {
       redirect(`/${workspaces[0].id}`)
     }
 
-    return <WorkspaceWelcome />
+    redirect("/welcome")
   }
 
   return (
