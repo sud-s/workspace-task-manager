@@ -2,7 +2,8 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Plus, Users, Settings } from "lucide-react"
+import { Home, Plus, Users, Settings, Menu, X } from "lucide-react"
+import { useState, useEffect } from "react"
 import { WorkspaceSwitcher } from "./workspace-switcher"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
@@ -13,7 +14,7 @@ import { useProjects } from "@/hooks/use-projects"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ThemeToggle } from "./theme-toggle"
 
-export function Sidebar() {
+function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
   const pathname = usePathname()
   const currentWorkspaceId = useWorkspaceStore((s) => s.currentWorkspaceId)
   const { data: projects, isLoading } = useProjects(currentWorkspaceId ?? "")
@@ -21,7 +22,7 @@ export function Sidebar() {
   const workspacePath = currentWorkspaceId ? `/${currentWorkspaceId}` : "/"
 
   return (
-    <aside className="flex h-full w-64 flex-col border-r border-zinc-800/50 bg-zinc-900/40 backdrop-blur-xl">
+    <>
       <div className="p-4">
         <WorkspaceSwitcher />
       </div>
@@ -31,6 +32,7 @@ export function Sidebar() {
       <nav className="flex-1 space-y-1 p-3">
         <Link
           href={workspacePath}
+          onClick={onNavClick}
           className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-zinc-800/60 hover:text-white ${
             pathname === workspacePath
               ? "bg-zinc-800/60 text-white shadow-sm"
@@ -72,6 +74,7 @@ export function Sidebar() {
                 <Link
                   key={project.id}
                   href={`/${currentWorkspaceId}/projects/${project.id}`}
+                  onClick={onNavClick}
                   className={`group flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-all ${
                     isActive
                       ? "bg-zinc-800/60 text-white font-medium"
@@ -99,6 +102,7 @@ export function Sidebar() {
 
         <Link
           href={currentWorkspaceId ? `/${currentWorkspaceId}/members` : "#"}
+          onClick={onNavClick}
           className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-zinc-800/60 hover:text-white ${
             pathname.includes("/members")
               ? "bg-zinc-800/60 text-white shadow-sm"
@@ -116,6 +120,7 @@ export function Sidebar() {
 
         <Link
           href={currentWorkspaceId ? `/${currentWorkspaceId}/settings` : "#"}
+          onClick={onNavClick}
           className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-zinc-800/60 hover:text-white ${
             pathname.includes("/settings")
               ? "bg-zinc-800/60 text-white shadow-sm"
@@ -141,6 +146,63 @@ export function Sidebar() {
         </CreateWorkspaceDialog>
         <ThemeToggle />
       </div>
+    </>
+  )
+}
+
+export function Sidebar() {
+  return (
+    <aside className="hidden lg:flex h-full w-64 flex-col border-r border-zinc-800/50 bg-zinc-900/40 backdrop-blur-xl">
+      <SidebarContent />
     </aside>
+  )
+}
+
+export function MobileSidebar() {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => { document.body.style.overflow = "" }
+  }, [open])
+
+  return (
+    <>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => setOpen(true)}
+        className="lg:hidden h-9 w-9 text-zinc-400 hover:text-white"
+      >
+        <Menu className="h-5 w-5" />
+      </Button>
+      {open && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setOpen(false)}
+          />
+          <div className="fixed inset-y-0 left-0 w-72 bg-zinc-950 border-r border-zinc-800/50 shadow-2xl" style={{ animation: "slide-up 0.2s ease-out" }}>
+            <div className="flex h-full flex-col">
+              <div className="flex items-center justify-end p-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setOpen(false)}
+                  className="h-8 w-8 text-zinc-400 hover:text-white"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              <SidebarContent onNavClick={() => setOpen(false)} />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }

@@ -169,14 +169,15 @@ export function TaskBoard({ projectId, workspaceId, filters }: TaskBoardProps) {
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <div className="grid grid-cols-3 gap-4">
+        <div className="flex lg:grid lg:grid-cols-3 gap-4 overflow-x-auto pb-2 lg:pb-0 snap-x snap-mandatory">
           {COLUMNS.map((status) => (
-            <Column
-              key={status}
-              status={status}
-              tasks={tasksByStatus[status]}
-              onTaskClick={setSelectedTaskId}
-            />
+            <div key={status} className="min-w-[280px] lg:min-w-0 snap-start">
+              <Column
+                status={status}
+                tasks={tasksByStatus[status]}
+                onTaskClick={setSelectedTaskId}
+              />
+            </div>
           ))}
         </div>
         <DragOverlay>

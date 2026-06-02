@@ -58,28 +58,28 @@ export default function ProjectPage({ params }: PageProps) {
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center justify-between">
+    <div className="flex flex-col gap-4 sm:gap-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="min-w-0">
           {projectLoading ? (
             <Skeleton className="h-8 w-48 bg-zinc-800/50" />
           ) : (
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-white truncate">
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white truncate">
                 {project?.name ?? "Project"}
               </h1>
             </div>
           )}
         </div>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center rounded-lg border border-border bg-card p-0.5">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
+          <div className="flex items-center rounded-lg border border-border bg-card p-0.5 shrink-0">
             {VIEW_OPTIONS.map(({ value, label, icon: Icon }) => (
               <Button
                 key={value}
                 variant="ghost"
                 size="sm"
                 onClick={() => setView(value)}
-                className={`h-8 px-2.5 text-xs gap-1.5 ${
+                className={`h-8 px-2 text-xs gap-1 ${
                   view === value
                     ? "bg-accent text-accent-foreground shadow-sm"
                     : "text-muted-foreground hover:text-card-foreground"

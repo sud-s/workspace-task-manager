@@ -29,8 +29,8 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center py-24 text-center">
-      <h2 className="text-2xl font-semibold tracking-tight">Welcome to Gize</h2>
+    <div className="flex flex-col items-center justify-center py-16 sm:py-24 text-center px-4">
+      <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">Welcome to Gize</h2>
       <p className="mt-2 text-sm text-muted-foreground max-w-sm">
         Get started by creating your first workspace.
       </p>

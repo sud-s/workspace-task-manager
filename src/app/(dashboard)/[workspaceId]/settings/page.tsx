@@ -40,7 +40,7 @@ export default function SettingsPage({ params }: PageProps) {
   async function handleDelete() {
     setDeleting(true)
     await deleteWorkspace.mutateAsync(workspaceId)
-    router.push("/dashboard")
+    router.push("/")
     router.refresh()
   }
 
@@ -56,29 +56,29 @@ export default function SettingsPage({ params }: PageProps) {
   if (!workspace) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/10 ring-1 ring-red-500/20 mb-4">
-          <Settings className="h-6 w-6 text-red-400" />
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 ring-1 ring-amber-500/20 mb-4">
+          <Settings className="h-6 w-6 text-amber-400" />
         </div>
         <h2 className="text-lg font-semibold text-zinc-200">Workspace not found</h2>
         <p className="mt-1 text-sm text-zinc-500">
-          This workspace may have been deleted or you don&apos;t have access.
+          This workspace doesn&apos;t exist, was deleted, or you don&apos;t have access.
         </p>
       </div>
     )
   }
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center gap-4">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex items-center gap-3 sm:gap-4">
         <Link
           href={`/${workspaceId}`}
-          className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50 transition-all"
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50 transition-all shrink-0"
         >
           <ArrowLeft className="h-4 w-4" />
         </Link>
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">Settings</h1>
-          <p className="mt-1 text-sm text-zinc-500">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Settings</h1>
+          <p className="mt-0.5 text-xs sm:text-sm text-zinc-500">
             Manage workspace settings
           </p>
         </div>
@@ -86,7 +86,7 @@ export default function SettingsPage({ params }: PageProps) {
 
       <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-800/50 to-transparent" />
 
-      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-6 backdrop-blur-sm max-w-lg">
+      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4 sm:p-6 backdrop-blur-sm max-w-lg">
         <h3 className="text-sm font-semibold text-zinc-300 mb-4">Workspace Name</h3>
         <form onSubmit={handleSave} className="space-y-4">
           <div className="space-y-2">

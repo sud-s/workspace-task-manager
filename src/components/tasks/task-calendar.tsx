@@ -128,59 +128,66 @@ export function TaskCalendar({ projectId, workspaceId, filters }: TaskCalendarPr
         </div>
       </div>
 
-      <div className="grid grid-cols-7">
-        {WEEKDAYS.map((day) => (
-          <div
-            key={day}
-            className="py-2 text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground border-b border-border"
-          >
-            {day}
-          </div>
-        ))}
-        {days.map((day) => {
-          const key = format(day, "yyyy-MM-dd")
-          const dayTasks = tasksByDate.get(key) ?? []
-          const inMonth = isSameMonth(day, currentMonth)
-          const today = isToday(day)
-          const isSelected = selectedDate && isSameDay(day, selectedDate)
-
-          return (
-            <button
-              key={key}
-              onClick={() => setSelectedDate(isSelected ? null : day)}
-              className={`min-h-[80px] p-1.5 text-left transition-colors border-b border-border hover:bg-accent/30 ${
-                !inMonth ? "opacity-30" : ""
-              } ${isSelected ? "bg-accent/40 ring-1 ring-inset ring-emerald-500/30" : ""}`}
+      <div className="overflow-x-auto">
+        <div className="grid grid-cols-7 min-w-[600px] sm:min-w-0">
+          {WEEKDAYS.map((day) => (
+            <div
+              key={day}
+              className="py-2 text-center text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-muted-foreground border-b border-border"
             >
-              <span
-                className={`inline-flex items-center justify-center h-6 w-6 rounded-full text-xs ${
-                  today
-                    ? "bg-emerald-500 text-white font-bold"
-                    : "text-card-foreground"
-                }`}
+              {day}
+            </div>
+          ))}
+          {days.map((day) => {
+            const key = format(day, "yyyy-MM-dd")
+            const dayTasks = tasksByDate.get(key) ?? []
+            const inMonth = isSameMonth(day, currentMonth)
+            const today = isToday(day)
+            const isSelected = selectedDate && isSameDay(day, selectedDate)
+
+            return (
+              <button
+                key={key}
+                onClick={() => setSelectedDate(isSelected ? null : day)}
+                className={`min-h-[60px] sm:min-h-[80px] p-1 text-left transition-colors border-b border-border hover:bg-accent/30 ${
+                  !inMonth ? "opacity-30" : ""
+                } ${isSelected ? "bg-accent/40 ring-1 ring-inset ring-emerald-500/30" : ""}`}
               >
-                {format(day, "d")}
-              </span>
-              {dayTasks.length > 0 && (
-                <div className="mt-1 space-y-0.5">
-                  {dayTasks.slice(0, 2).map((task) => (
-                    <div
-                      key={task.id}
-                      className="truncate rounded bg-emerald-500/10 px-1 py-0.5 text-[10px] leading-tight text-emerald-400"
-                    >
-                      {task.title}
-                    </div>
-                  ))}
-                  {dayTasks.length > 2 && (
-                    <div className="text-[10px] text-muted-foreground px-1">
-                      +{dayTasks.length - 2} more
-                    </div>
-                  )}
-                </div>
-              )}
-            </button>
-          )
-        })}
+                <span
+                  className={`inline-flex items-center justify-center h-5 w-5 sm:h-6 sm:w-6 rounded-full text-[10px] sm:text-xs ${
+                    today
+                      ? "bg-emerald-500 text-white font-bold"
+                      : "text-card-foreground"
+                  }`}
+                >
+                  {format(day, "d")}
+                </span>
+                {dayTasks.length > 0 && (
+                  <div className="mt-0.5 sm:mt-1 space-y-0.5 hidden sm:block">
+                    {dayTasks.slice(0, 2).map((task) => (
+                      <div
+                        key={task.id}
+                        className="truncate rounded bg-emerald-500/10 px-0.5 sm:px-1 py-0.5 text-[8px] sm:text-[10px] leading-tight text-emerald-400"
+                      >
+                        {task.title}
+                      </div>
+                    ))}
+                    {dayTasks.length > 2 && (
+                      <div className="text-[8px] sm:text-[10px] text-muted-foreground px-1">
+                        +{dayTasks.length - 2}
+                      </div>
+                    )}
+                  </div>
+                )}
+                {dayTasks.length > 0 && (
+                  <div className="sm:hidden flex justify-center mt-0.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  </div>
+                )}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {selectedDate && selectedDateTasks.length > 0 && (

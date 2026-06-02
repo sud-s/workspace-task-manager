@@ -66,29 +66,29 @@ export default function MembersPage({ params }: PageProps) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-white">Members</h1>
-        <p className="mt-1 text-sm text-zinc-500">
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Members</h1>
+        <p className="mt-0.5 text-xs sm:text-sm text-zinc-500">
           Manage who has access to this workspace
         </p>
       </div>
 
       <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-800/50 to-transparent" />
 
-      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-6 backdrop-blur-sm">
+      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4 sm:p-6 backdrop-blur-sm">
         <h3 className="flex items-center gap-2 text-sm font-semibold text-zinc-300 mb-4">
           <UserPlus className="h-4 w-4 text-emerald-400" />
           Invite Member
         </h3>
-        <form onSubmit={handleInvite} className="flex gap-3">
+        <form onSubmit={handleInvite} className="flex flex-col sm:flex-row gap-3">
           <Input
             type="email"
             placeholder="email@example.com"
             value={inviteEmail}
             onChange={(e) => setInviteEmail(e.target.value)}
             required
-            className="max-w-sm border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+            className="w-full sm:max-w-sm border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
           />
           <Button
             type="submit"

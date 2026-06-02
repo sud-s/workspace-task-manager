@@ -60,11 +60,11 @@ export default function WorkspaceDashboardPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">{workspace.name}</h1>
-          <p className="mt-1 text-sm text-zinc-500">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white truncate">{workspace.name}</h1>
+          <p className="mt-0.5 text-xs sm:text-sm text-zinc-500">
             {projects ? `${projects.length} ${projects.length === 1 ? "project" : "projects"}` : "Loading projects..."}
           </p>
         </div>
@@ -74,12 +74,12 @@ export default function WorkspaceDashboardPage() {
       <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-800/50 to-transparent" />
 
       {projLoading ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <Skeleton className="h-40 bg-zinc-800/50 rounded-xl" />
           <Skeleton className="h-40 bg-zinc-800/50 rounded-xl" />
         </div>
       ) : projects && projects.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
             <ProjectCard
               key={project.id}
