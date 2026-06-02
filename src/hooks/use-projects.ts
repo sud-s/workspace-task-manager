@@ -14,7 +14,7 @@ export function useProjects(workspaceId: string): UseQueryResult<ProjectWithCoun
   return useQuery({
     queryKey: ["projects", workspaceId],
     queryFn: () => getProjects(supabase, workspaceId),
-    enabled: !!workspaceId,
+    enabled: typeof workspaceId === "string" && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(workspaceId),
   })
 }
 

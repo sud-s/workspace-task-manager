@@ -23,7 +23,7 @@ export function useWorkspace(id: string): UseQueryResult<WorkspaceRow | null> {
   return useQuery({
     queryKey: ["workspace", id],
     queryFn: () => getWorkspace(supabase, id),
-    enabled: !!id,
+    enabled: typeof id === "string" && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(id),
   })
 }
 

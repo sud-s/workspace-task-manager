@@ -15,7 +15,7 @@ export function useWorkspaceMembers(workspaceId: string): UseQueryResult<Workspa
   return useQuery({
     queryKey: ["workspace-members", workspaceId],
     queryFn: () => getWorkspaceMembers(supabase, workspaceId),
-    enabled: !!workspaceId,
+    enabled: typeof workspaceId === "string" && /^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(workspaceId),
   })
 }
 
