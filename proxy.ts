@@ -8,7 +8,7 @@ const authRoutes = ["/login", "/signup", "/forgot-password", "/reset-password"]
 function matchesProtectedRoute(pathname: string): boolean {
   if (protectedRoutes.includes(pathname)) return true
   if (
-    /^\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.test(
+    /^\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?:\/.*)?$/i.test(
       pathname,
     )
   )
