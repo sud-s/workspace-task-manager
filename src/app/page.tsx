@@ -23,7 +23,7 @@ export default async function HomePage() {
       redirect(`/${workspaces[0].id}`)
     }
 
-    redirect("/dashboard")
+    redirect("/profile")
   }
 
   return (
