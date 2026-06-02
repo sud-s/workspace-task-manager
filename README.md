@@ -53,13 +53,12 @@
 
 ### Known Issues / What's Not Working
 
-- The project can't build locally due to ENOSPC (disk space), but builds on Vercel
-- No dark/light theme toggle (nice-to-have)
-- No Kanban board (nice-to-have)
-- No calendar view (nice-to-have)
+- No dark/light theme toggle (known issue)
+- No drag-and-drop Kanban board (known issue)
+- No calendar view (known issue)
+- No email notifications (known issue)
 - Supabase CLI unavailable on Windows (`win32-x64` binary missing) — Edge Function deployed via Management API (Python)
 - Domain `gize.vercel.app` owned by another Vercel team — using `gize-pi.vercel.app`
-- No email notifications
 
 ---
 

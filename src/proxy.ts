@@ -18,7 +18,7 @@ function isPublicRoute(pathname: string): boolean {
   return publicRoutes.some((r) => pathname === r || pathname.startsWith(r + "/"))
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   const isAuthPage = authRoutes.includes(pathname)
