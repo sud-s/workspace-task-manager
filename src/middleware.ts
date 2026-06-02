@@ -2,25 +2,27 @@ import { createServerClient } from "@supabase/ssr"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
-const protectedRoutes = ["/dashboard"]
 const authRoutes = ["/login", "/signup", "/forgot-password", "/reset-password"]
 
-function matchesProtectedRoute(pathname: string): boolean {
-  if (protectedRoutes.includes(pathname)) return true
-  if (
-    /^\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?:\/.*)?$/i.test(
-      pathname,
-    )
-  )
-    return true
-  return false
+const publicRoutes = [
+  "/",
+  "/login",
+  "/signup",
+  "/forgot-password",
+  "/reset-password",
+  "/auth",
+  "/api",
+]
+
+function isPublicRoute(pathname: string): boolean {
+  return publicRoutes.some((r) => pathname === r || pathname.startsWith(r + "/"))
 }
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   const isAuthPage = authRoutes.includes(pathname)
-  const isProtected = matchesProtectedRoute(pathname)
+  const isProtected = !isPublicRoute(pathname)
 
   let supabaseResponse = NextResponse.next({ request })
 
