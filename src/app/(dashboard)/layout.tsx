@@ -18,7 +18,7 @@ export default function DashboardLayout({
           </div>
           <UserNav />
         </header>
-        <main className="flex-1 overflow-y-auto bg-gradient-to-b from-transparent to-zinc-900/50">
+        <main className="flex-1 overflow-y-auto bg-gradient-to-b from-transparent to-background/50">
           <div className="mx-auto max-w-6xl p-4 sm:p-6">
             {children}
           </div>

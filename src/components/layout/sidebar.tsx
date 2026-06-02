@@ -16,7 +16,9 @@ import { ThemeToggle } from "./theme-toggle"
 
 function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
   const pathname = usePathname()
-  const currentWorkspaceId = useWorkspaceStore((s) => s.currentWorkspaceId)
+  const storedWsId = useWorkspaceStore((s) => s.currentWorkspaceId)
+  const urlWsId = pathname.split("/")[1]
+  const currentWorkspaceId = storedWsId ?? (urlWsId && urlWsId.length === 36 ? urlWsId : null)
   const { data: projects, isLoading } = useProjects(currentWorkspaceId ?? "")
 
   const workspacePath = currentWorkspaceId ? `/${currentWorkspaceId}` : "/"
