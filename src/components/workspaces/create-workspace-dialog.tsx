@@ -37,7 +37,6 @@ export function CreateWorkspaceDialog({ children }: CreateWorkspaceDialogProps) 
       setOpen(false)
       router.push(`/${workspace.id}`)
     } catch {
-      // Error handled by React Query
     }
   }
 

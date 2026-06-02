@@ -57,9 +57,7 @@ export function CreateTaskDialog({ projectId, workspaceId }: CreateTaskDialogPro
           setAssigneeId(null)
           setDueDate("")
         },
-        onError: () => {
-          // error handled by React Query
-        },
+        onError: () => {},
       },
     )
   }

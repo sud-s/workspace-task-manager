@@ -33,7 +33,6 @@ export function CreateProjectDialog({ workspaceId, children }: CreateProjectDial
       setName("")
       setOpen(false)
     } catch {
-      // error handled by mutation
     }
   }
 
