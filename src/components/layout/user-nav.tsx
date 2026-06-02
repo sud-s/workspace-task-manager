@@ -17,10 +17,18 @@ export function UserNav() {
 
   return (
     <div className="flex items-center gap-2">
-      <Avatar className="h-8 w-8">
-        <AvatarFallback className="text-xs">U</AvatarFallback>
+      <Avatar className="h-8 w-8 ring-2 ring-zinc-800 ring-offset-2 ring-offset-background">
+        <AvatarFallback className="text-xs bg-gradient-to-br from-emerald-500 to-emerald-600 text-white font-semibold">
+          U
+        </AvatarFallback>
       </Avatar>
-      <Button variant="ghost" size="icon" onClick={handleSignOut} title="Sign out">
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={handleSignOut}
+        title="Sign out"
+        className="text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50"
+      >
         <LogOut className="h-4 w-4" />
       </Button>
     </div>

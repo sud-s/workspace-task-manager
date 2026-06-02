@@ -51,11 +51,13 @@ export default function ProjectPage({ params }: PageProps) {
       <div className="flex items-center justify-between">
         <div className="min-w-0">
           {projectLoading ? (
-            <Skeleton className="h-8 w-48" />
+            <Skeleton className="h-8 w-48 bg-zinc-800/50" />
           ) : (
-            <h1 className="text-2xl font-semibold tracking-tight truncate">
-              {project?.name ?? "Project"}
-            </h1>
+            <div>
+              <h1 className="text-2xl font-bold tracking-tight text-white truncate">
+                {project?.name ?? "Project"}
+              </h1>
+            </div>
           )}
         </div>
         <div className="flex items-center gap-2">
@@ -63,6 +65,8 @@ export default function ProjectPage({ params }: PageProps) {
           <CreateTaskDialog projectId={projectId} workspaceId={workspaceId} />
         </div>
       </div>
+
+      <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-800/50 to-transparent" />
 
       <TaskFilters workspaceId={workspaceId} />
 

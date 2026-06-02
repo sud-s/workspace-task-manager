@@ -32,27 +32,26 @@ export function TaskDetailPanel({ taskId, workspaceId, onClose }: TaskDetailPane
 
   return (
     <Sheet open={!!taskId} onOpenChange={(open) => { if (!open) onClose() }}>
-      <SheetContent key={taskId ?? "closed"} className="overflow-y-auto">
+      <SheetContent key={taskId ?? "closed"} className="overflow-y-auto border-l border-zinc-800/60 bg-zinc-950/95 backdrop-blur-xl">
         {isLoading && (
           <div className="space-y-4 pt-6">
-            <Skeleton className="h-6 w-3/4" />
-            <Skeleton className="h-20 w-full" />
-            <Skeleton className="h-9 w-full" />
-            <Skeleton className="h-9 w-full" />
-            <Skeleton className="h-9 w-full" />
+            <Skeleton className="h-7 w-3/4 bg-zinc-800/50" />
+            <Skeleton className="h-24 w-full bg-zinc-800/50" />
+            <Skeleton className="h-10 w-full bg-zinc-800/50" />
+            <Skeleton className="h-10 w-full bg-zinc-800/50" />
           </div>
         )}
 
         {error && (
           <div className="flex flex-col items-center gap-2 pt-6 text-center">
             <p className="text-sm text-destructive">Failed to load task</p>
-            <p className="text-xs text-muted-foreground">{error.message}</p>
+            <p className="text-xs text-zinc-500">{error.message}</p>
           </div>
         )}
 
         {!isLoading && !error && !task && taskId && (
           <div className="pt-6 text-center">
-            <p className="text-sm text-muted-foreground">Task not found</p>
+            <p className="text-sm text-zinc-500">Task not found</p>
           </div>
         )}
 
@@ -121,49 +120,51 @@ function TaskDetailForm({ task, members }: TaskDetailFormProps) {
   }
 
   return (
-    <form onSubmit={handleSave}>
-      <SheetHeader>
-        <SheetTitle>Task Details</SheetTitle>
-        <SheetDescription>
+    <form onSubmit={handleSave} className="flex flex-col min-h-full">
+      <SheetHeader className="pb-6 border-b border-zinc-800/50">
+        <SheetTitle className="text-lg text-zinc-100">Edit Task</SheetTitle>
+        <SheetDescription className="text-xs text-zinc-500">
           Created {formatDate(task.created_at)}
         </SheetDescription>
       </SheetHeader>
 
-      <div className="grid gap-4 py-6">
-        <div className="grid gap-2">
-          <Label htmlFor="detail-title">Title</Label>
+      <div className="flex-1 space-y-5 py-6">
+        <div className="space-y-2">
+          <Label htmlFor="detail-title" className="text-xs font-medium text-zinc-400">Title</Label>
           <Input
             id="detail-title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
           />
         </div>
 
-        <div className="grid gap-2">
-          <Label htmlFor="detail-description">Description</Label>
+        <div className="space-y-2">
+          <Label htmlFor="detail-description" className="text-xs font-medium text-zinc-400">Description</Label>
           <Textarea
             id="detail-description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
+            className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20 resize-none"
           />
         </div>
 
-        <div className="grid gap-2">
-          <Label>Status</Label>
+        <div className="space-y-2">
+          <Label className="text-xs font-medium text-zinc-400">Status</Label>
           <TaskStatusSelect
             value={status}
             onChange={(s) => setStatus(s)}
           />
         </div>
 
-        <div className="grid gap-2">
-          <Label htmlFor="detail-assignee">Assignee</Label>
+        <div className="space-y-2">
+          <Label htmlFor="detail-assignee" className="text-xs font-medium text-zinc-400">Assignee</Label>
           <select
             id="detail-assignee"
             value={assigneeId ?? ""}
             onChange={(e) => setAssigneeId(e.target.value || null)}
-            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-ring"
+            className="flex h-10 w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-sm text-zinc-100 shadow-sm transition-colors focus:outline-none focus:border-emerald-500/30 focus:ring-1 focus:ring-emerald-500/20"
           >
             <option value="">Unassigned</option>
             {members?.map((member) => (
@@ -174,25 +175,30 @@ function TaskDetailForm({ task, members }: TaskDetailFormProps) {
           </select>
         </div>
 
-        <div className="grid gap-2">
-          <Label htmlFor="detail-due-date">Due Date</Label>
+        <div className="space-y-2">
+          <Label htmlFor="detail-due-date" className="text-xs font-medium text-zinc-400">Due Date</Label>
           <Input
             id="detail-due-date"
             type="date"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
+            className="border-zinc-800 bg-zinc-900/50 text-zinc-100 focus:border-emerald-500/30 focus:ring-emerald-500/20"
           />
         </div>
       </div>
 
-      <SheetFooter>
+      <SheetFooter className="border-t border-zinc-800/50 pt-4">
         {hasChanges && (
-          <Button type="button" variant="outline" onClick={handleCancel}>
+          <Button type="button" variant="ghost" onClick={handleCancel} className="text-zinc-400 hover:text-zinc-200">
             Cancel
           </Button>
         )}
-        <Button type="submit" disabled={!hasChanges || updateTask.isPending || !title.trim()}>
-          {updateTask.isPending ? "Saving..." : "Save"}
+        <Button
+          type="submit"
+          disabled={!hasChanges || updateTask.isPending || !title.trim()}
+          className="bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 disabled:opacity-50"
+        >
+          {updateTask.isPending ? "Saving..." : "Save Changes"}
         </Button>
       </SheetFooter>
     </form>

@@ -5,7 +5,6 @@ import { useSupabase } from "@/providers/supabase-provider"
 import { getWorkspaceMembers } from "@/lib/queries"
 import { inviteMember, removeMember } from "@/lib/mutations"
 import type { WorkspaceRole } from "@/lib/constants"
-
 export function useWorkspaceMembers(workspaceId: string) {
   const supabase = useSupabase()
 

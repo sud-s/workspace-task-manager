@@ -14,23 +14,29 @@ type TaskStatusSelectProps = {
   onChange: (status: TaskStatus) => void
 }
 
-const statusColors: Record<TaskStatus, string> = {
-  todo: "text-amber-600 dark:text-amber-400",
-  in_progress: "text-blue-600 dark:text-blue-400",
-  done: "text-green-600 dark:text-green-400",
+const statusStyles: Record<TaskStatus, { color: string; dot: string }> = {
+  todo: { color: "text-amber-400", dot: "bg-amber-400" },
+  in_progress: { color: "text-blue-400", dot: "bg-blue-400" },
+  done: { color: "text-emerald-400", dot: "bg-emerald-400" },
 }
 
 export function TaskStatusSelect({ value, onChange }: TaskStatusSelectProps) {
   return (
     <Select value={value} onValueChange={(v) => onChange(v as TaskStatus)}>
-      <SelectTrigger className={`w-36 ${statusColors[value]}`}>
-        <SelectValue />
+      <SelectTrigger className={`w-36 border-zinc-800 bg-zinc-900/50 ${statusStyles[value].color}`}>
+        <div className="flex items-center gap-2">
+          <span className={`h-1.5 w-1.5 rounded-full ${statusStyles[value].dot}`} />
+          <SelectValue />
+        </div>
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="border-zinc-800 bg-zinc-900">
         {(Object.entries(TASK_STATUS_LABELS) as [TaskStatus, string][]).map(
           ([status, label]) => (
-            <SelectItem key={status} value={status} className={statusColors[status]}>
-              {label}
+            <SelectItem key={status} value={status} className={`${statusStyles[status].color} focus:bg-zinc-800 focus:text-white`}>
+              <div className="flex items-center gap-2">
+                <span className={`h-1.5 w-1.5 rounded-full ${statusStyles[status].dot}`} />
+                {label}
+              </div>
             </SelectItem>
           ),
         )}

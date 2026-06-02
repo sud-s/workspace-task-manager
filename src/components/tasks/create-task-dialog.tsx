@@ -67,40 +67,42 @@ export function CreateTaskDialog({ projectId, workspaceId }: CreateTaskDialogPro
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm">
+        <Button size="sm" className="bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/20">
           <Plus className="h-4 w-4" />
           Add Task
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="border-zinc-800 bg-zinc-950">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Create Task</DialogTitle>
-            <DialogDescription>Add a new task to this project.</DialogDescription>
+            <DialogTitle className="text-zinc-100">Create Task</DialogTitle>
+            <DialogDescription className="text-zinc-500">Add a new task to this project.</DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="create-task-title">Title</Label>
+              <Label htmlFor="create-task-title" className="text-xs font-medium text-zinc-400">Title</Label>
               <Input
                 id="create-task-title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="What needs to be done?"
                 required
+                className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="create-task-description">Description</Label>
+              <Label htmlFor="create-task-description" className="text-xs font-medium text-zinc-400">Description</Label>
               <Textarea
                 id="create-task-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Optional description"
                 rows={3}
+                className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20 resize-none"
               />
             </div>
             <div className="grid gap-2">
-              <Label>Assignee</Label>
+              <Label className="text-xs font-medium text-zinc-400">Assignee</Label>
               <TaskAssigneeSelect
                 workspaceId={workspaceId}
                 value={assigneeId}
@@ -108,20 +110,25 @@ export function CreateTaskDialog({ projectId, workspaceId }: CreateTaskDialogPro
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="create-task-due-date">Due Date</Label>
+              <Label htmlFor="create-task-due-date" className="text-xs font-medium text-zinc-400">Due Date</Label>
               <Input
                 id="create-task-due-date"
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
+                className="border-zinc-800 bg-zinc-900/50 text-zinc-100 focus:border-emerald-500/30 focus:ring-emerald-500/20"
               />
             </div>
           </div>
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+            <Button type="button" variant="ghost" onClick={() => setOpen(false)} className="text-zinc-400 hover:text-zinc-200">
               Cancel
             </Button>
-            <Button type="submit" disabled={!title.trim() || createTask.isPending}>
+            <Button
+              type="submit"
+              disabled={!title.trim() || createTask.isPending}
+              className="bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 disabled:opacity-50"
+            >
               {createTask.isPending ? "Creating..." : "Create"}
             </Button>
           </DialogFooter>

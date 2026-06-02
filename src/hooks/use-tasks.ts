@@ -7,7 +7,6 @@ import { createTask, updateTask, deleteTask, updateTaskStatus } from "@/lib/muta
 import type { TaskFilters, TaskRow } from "@/lib/queries"
 import type { CreateTaskData, UpdateTaskData } from "@/lib/mutations"
 import type { TaskStatus } from "@/lib/constants"
-
 export function useTasks(projectId: string, filters?: TaskFilters) {
   const supabase = useSupabase()
 

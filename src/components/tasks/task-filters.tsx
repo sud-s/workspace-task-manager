@@ -4,9 +4,25 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import { useWorkspaceMembers } from "@/hooks/use-members"
 import { TASK_STATUS_LABELS } from "@/lib/constants"
 import type { TaskStatus } from "@/lib/constants"
+import { ListFilter, X } from "lucide-react"
 
 type TaskFiltersProps = {
   workspaceId: string
+}
+
+const statusStyles: Record<TaskStatus, { active: string; inactive: string }> = {
+  todo: {
+    active: "bg-amber-500/10 text-amber-400 border-amber-500/30",
+    inactive: "bg-zinc-800/50 text-zinc-400 border-zinc-700/50 hover:border-zinc-600/50 hover:text-zinc-300",
+  },
+  in_progress: {
+    active: "bg-blue-500/10 text-blue-400 border-blue-500/30",
+    inactive: "bg-zinc-800/50 text-zinc-400 border-zinc-700/50 hover:border-zinc-600/50 hover:text-zinc-300",
+  },
+  done: {
+    active: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
+    inactive: "bg-zinc-800/50 text-zinc-400 border-zinc-700/50 hover:border-zinc-600/50 hover:text-zinc-300",
+  },
 }
 
 export function TaskFilters({ workspaceId }: TaskFiltersProps) {
@@ -44,23 +60,22 @@ export function TaskFilters({ workspaceId }: TaskFiltersProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
+      <ListFilter className="h-3.5 w-3.5 text-zinc-500 mr-0.5" />
       {(Object.entries(TASK_STATUS_LABELS) as [TaskStatus, string][]).map(
         ([status, label]) => {
           const isActive = currentStatus.includes(status)
+          const styles = statusStyles[status]
           return (
             <button
               key={status}
               onClick={() => toggleStatus(status)}
-              className={`inline-flex items-center rounded-md px-2.5 py-1 text-xs font-medium transition-colors ${
-                isActive
-                  ? status === "todo"
-                    ? "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
-                    : status === "in_progress"
-                      ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
-                      : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
-                  : "bg-secondary text-secondary-foreground hover:bg-accent"
+              className={`inline-flex items-center rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
+                isActive ? styles.active : styles.inactive
               }`}
             >
+              <span className={`mr-1.5 h-1.5 w-1.5 rounded-full ${
+                status === "todo" ? "bg-amber-400" : status === "in_progress" ? "bg-blue-400" : "bg-emerald-400"
+              }`} />
               {label}
             </button>
           )
@@ -70,7 +85,7 @@ export function TaskFilters({ workspaceId }: TaskFiltersProps) {
       <select
         value={currentAssignee}
         onChange={(e) => setFilter("assignee", e.target.value)}
-        className="h-8 rounded-md border border-input bg-transparent px-2 text-xs shadow-sm focus:outline-none focus:ring-1 focus:ring-ring"
+        className="h-7 rounded-lg border border-zinc-700/50 bg-zinc-800/50 px-2 text-xs text-zinc-400 shadow-sm focus:outline-none focus:border-zinc-600/50 hover:border-zinc-600/50 transition-colors"
       >
         <option value="">All Assignees</option>
         {members?.map((member) => (
@@ -83,8 +98,9 @@ export function TaskFilters({ workspaceId }: TaskFiltersProps) {
       {hasFilters && (
         <button
           onClick={clearFilters}
-          className="inline-flex items-center rounded-md px-2.5 py-1 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium text-zinc-500 hover:text-zinc-300 transition-colors"
         >
+          <X className="h-3 w-3" />
           Clear
         </button>
       )}

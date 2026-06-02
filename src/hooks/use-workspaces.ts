@@ -4,7 +4,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { useSupabase } from "@/providers/supabase-provider"
 import { getWorkspaces, getWorkspace } from "@/lib/queries"
 import { createWorkspace } from "@/lib/mutations"
-
 export function useWorkspaces() {
   const supabase = useSupabase()
 

@@ -40,22 +40,22 @@ export function WorkspaceSwitcher() {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between"
+            className="w-full justify-between border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800/50 hover:text-zinc-100"
           >
             <div className="flex items-center gap-2 truncate">
-              <Layers className="h-4 w-4 shrink-0" />
-              <span className="truncate">
+              <Layers className="h-4 w-4 shrink-0 text-emerald-400" />
+              <span className="truncate text-zinc-300">
                 {isLoading
                   ? "Loading..."
                   : activeWorkspace?.name ?? "Select workspace"}
               </span>
             </div>
-            <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
+            <ChevronsUpDown className="h-4 w-4 shrink-0 text-zinc-600" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-2" align="start">
+        <PopoverContent className="w-[200px] p-2 border-zinc-800 bg-zinc-900" align="start">
           <div className="space-y-1">
-            <p className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
+            <p className="px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
               Workspaces
             </p>
             {workspaces?.map((workspace) => (
@@ -63,22 +63,24 @@ export function WorkspaceSwitcher() {
                 key={workspace.id}
                 onClick={() => handleSelect(workspace.id)}
                 className={cn(
-                  "flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent",
-                  activeWorkspace?.id === workspace.id && "bg-accent",
+                  "flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors",
+                  activeWorkspace?.id === workspace.id
+                    ? "bg-zinc-800 text-zinc-100"
+                    : "text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-200",
                 )}
               >
                 <Check
                   className={cn(
                     "h-4 w-4",
                     activeWorkspace?.id === workspace.id
-                      ? "opacity-100"
+                      ? "opacity-100 text-emerald-400"
                       : "opacity-0",
                   )}
                 />
-                {workspace.name}
+                <span className="truncate">{workspace.name}</span>
               </button>
             ))}
-            <div className="border-t pt-1 mt-1">
+            <div className="border-t border-zinc-800 pt-2 mt-2">
               <CreateWorkspaceDialog />
             </div>
           </div>
