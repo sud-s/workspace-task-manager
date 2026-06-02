@@ -9,16 +9,14 @@ import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { CreateWorkspaceDialog } from "@/components/workspaces/create-workspace-dialog"
 import { CreateProjectDialog } from "@/components/projects/create-project-dialog"
-import { useWorkspaceStore } from "@/stores/workspace-store"
 import { useProjects } from "@/hooks/use-projects"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ThemeToggle } from "./theme-toggle"
 
 function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
   const pathname = usePathname()
-  const storedWsId = useWorkspaceStore((s) => s.currentWorkspaceId)
   const urlWsId = pathname.split("/")[1]
-  const currentWorkspaceId = storedWsId ?? (urlWsId && urlWsId.length === 36 ? urlWsId : null)
+  const currentWorkspaceId = urlWsId && urlWsId.length === 36 ? urlWsId : null
   const { data: projects, isLoading } = useProjects(currentWorkspaceId ?? "")
 
   const workspacePath = currentWorkspaceId ? `/${currentWorkspaceId}` : "/"
