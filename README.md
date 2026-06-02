@@ -1,272 +1,116 @@
-<div align="center">
-  <h1>ጊዜ <span style="font-weight:300">/</span> Gize</h1>
-  <p><strong>Multi-Workspace Task Manager</strong></p>
-  <p>
-    <em>Gize means "time" in Amharic — time management, made collaborative.</em>
-  </p>
+# ጊዜ / Gize
 
-  <p>
-    <img src="https://img.shields.io/badge/Next.js_16-000?logo=next.js&logoColor=fff" alt="Next.js 16">
-    <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff" alt="TypeScript">
-    <img src="https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=fff" alt="Supabase">
-    <img src="https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=fff" alt="Vercel">
-    <img src="https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=fff" alt="ESLint">
-  </p>
+> **Multi-workspace task manager.**  
+> Gize means *"time"* in Amharic — time management, made collaborative.
 
-  <p>
-    <a href="#-overview">Overview</a> •
-    <a href="#-features">Features</a> •
-    <a href="#-tech-stack">Stack</a> •
-    <a href="#-quick-start">Quick Start</a> •
-    <a href="#-architecture">Architecture</a>
-  </p>
-
-  <p>
-    <strong>Started:</strong> June 2, 2026 — 1:42 PM EAT (UTC+3)
-  </p>
-</div>
+**Started:** June 2, 2026 — 1:42 PM EAT (UTC+3)
 
 ---
 
-## 📋 Overview
+## Table of Contents
 
-**Gize** is a full-stack task management application built for the Fullstack Engineer take-home assignment. It supports **multi-workspace collaboration** with real-time updates, granular Row-Level Security, and a polished inline-editing experience.
-
-### ✨ What Makes It Different
-
-| | |
-|---|---|
-| **Workspace Isolation** | Every query respects RLS — no cross-workspace leaks |
-| **Real-Time Collaboration** | Changes sync instantly via Supabase Realtime channels |
-| **Optimistic UI** | Status updates feel instant; rollback with feedback on failure |
-| **URL-Persisted Filters** | Share a URL → someone else sees the exact same filtered view |
-| **Slide-Out Editing** | Edit any task field without leaving the list or reloading the page |
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Quick Start](#quick-start)
+- [Docs](#docs)
+- [Scoring](#scoring)
 
 ---
 
-## 🚀 Features
+## Overview
 
-### Screens
+A full-stack task management app with workspace isolation, real-time collaboration, and polished inline editing. Built for the Fullstack Engineer take-home assignment.
 
-```
-┌─────────────────┐  ┌──────────────────┐  ┌───────────────────┐
-│  Auth           │  │  Workspace       │  │  Project View     │
-│  ┌───────────┐  │  │  Dashboard       │  │                   │
-│  │ Email     │  │  │  ┌─ Project ──┐  │  │  ┌─ Filters ────┐ │
-│  │ Password  │  │  │  │ Todo   3   │  │  │  │ Status ☑     │ │
-│  │ Sign In   │  │  │  │ In Prog 2 │  │  │  │ Assignee ▼  │ │
-│  └───────────┘  │  │  │ Done   5   │  │  │  └──────────────┘ │
-│                 │  │  └────────────┘  │  │  ┌─ Task List ──┐ │
-│  + Sign Up      │  │  ┌─ Project ──┐  │  │  │ ☐ Design    │ │
-│  + Passwordless │  │  │ Todo   1   │  │  │  │ ▶ API       │ │
-└─────────────────┘  │  ...          │  │  │  │ ✓ Deploy    │ │
-                     │  └────────────┘  │  │  └──────────────┘ │
-                     └──────────────────┘  └───────────────────┘
-```
+<details>
+<summary><strong>Core Requirements</strong></summary>
 
-### Requirement Checklist
+| Req | Description |
+|-----|-------------|
+| **R1** | Schema + RLS on all 4 ops, workspace isolation |
+| **R2** | Generated Supabase types, zero `any` |
+| **R3** | Realtime task updates via Supabase channels |
+| **R4** | URL-synced filters — share the URL, share the view |
+| **R5** | Inline editing with save/cancel affordance |
+| **R6** | Loading, empty, error states on every view |
+| **R7** | Optimistic UI — instant update, rollback on failure |
+| **R8** | Edge Function for overdue tasks + RLS |
 
-| Req | Description | Status |
-|-----|------------|--------|
-| **R1** | Schema + RLS on all 4 ops, workspace isolation | ✅ |
-| **R2** | Generated Supabase types, zero `any` | ✅ |
-| **R3** | Realtime task updates via Supabase channels | ✅ |
-| **R4** | URL-synced filters (status + assignee) | ✅ |
-| **R5** | Inline editing with save/cancel affordance | ✅ |
-| **R6** | Loading/empty/error states on every view | ✅ |
-| **R7** | Optimistic UI with rollback on failure | ✅ |
-| **R8** | Edge Function for overdue tasks + RLS | ✅ |
+</details>
 
 ---
 
-## 🛠 Tech Stack
+## Features
 
-| Layer | Choice | Why |
-|-------|--------|-----|
-| **Framework** | Next.js 16 (App Router) | SSR, Server Components, latest React |
-| **Language** | TypeScript (strict) | Zero `any`, full type safety |
-| **Database** | Supabase (PostgreSQL) | Built-in RLS, Realtime, Auth |
-| **Auth** | Supabase Auth | Email/password, PKCE, SSR cookies |
-| **State** | React Query + Zustand | Server cache + client state, no bloat |
-| **Styling** | Tailwind CSS v4 + shadcn/ui | Utility-first, themed, responsive |
-| **Realtime** | Supabase Realtime | WebSocket-based, channel subscriptions |
-| **Edge** | Supabase Edge Functions (Deno) | For overdue tasks endpoint |
-| **Deploy** | Vercel | Zero-config, edge-ready |
-
-```
-next.js 16  ───  react query  ───  supabase  ───  postgres (rls)
-    │                │                  │
-   app              hooks           realtime
-  router        (optimistic)      (websocket)
-```
+🔐 **Auth** — Sign up, sign in, sign out via Supabase Auth  
+📊 **Workspace Dashboard** — Project cards with task counts by status  
+📋 **Project View** — Full task list with inline status, assignee, due date, filters  
+✏️ **Inline Editing** — Slide-out panel, all fields editable, no page reload  
+⚡ **Realtime** — Changes sync instantly across users  
+🎯 **URL Filters** — `?status=todo,in_progress&assignee=uuid` — shareable, restorable  
+🔄 **Optimistic Updates** — Status changes are instant, roll back gracefully on error  
 
 ---
 
-## ⚡ Quick Start
+## Tech Stack
+
+| Layer | Choice |
+|-------|--------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript (strict) |
+| Database | Supabase (PostgreSQL + RLS) |
+| Auth | Supabase Auth (PKCE, SSR cookies) |
+| State | React Query + Zustand |
+| Styling | Tailwind CSS v4 + shadcn/ui |
+| Realtime | Supabase Realtime (WebSockets) |
+| Edge Functions | Supabase (Deno) |
+| Deploy | Vercel |
+
+---
+
+## Quick Start
 
 ```bash
 git clone https://github.com/sud-s/workspace-task-manager.git
 cd workspace-task-manager
 npm install
-cp .env.example .env.local   # fill in your Supabase credentials
+cp .env.example .env.local   # add your Supabase credentials
 npm run dev
 ```
 
-**Detailed setup** → see [docs/SETUP.md](docs/SETUP.md)
-
-### Prerequisites
-- [Node.js](https://nodejs.org) 20+
-- [Supabase](https://supabase.com) project (free tier)
-- [Vercel](https://vercel.com) account (for deployment)
+Detailed setup → [docs/SETUP.md](docs/SETUP.md)
 
 ---
 
-## 🏗 Architecture
+## Docs
 
-```
-┌──────────────────────────────────────────────────┐
-│                   Browser                         │
-│  ┌──────────┐  ┌──────────┐  ┌────────────────┐  │
-│  │ Auth     │  │ Dashboard│  │ Project View   │  │
-│  │ Pages    │  │ Layout   │  │ + Task Panel   │  │
-│  └────┬─────┘  └────┬─────┘  └───────┬────────┘  │
-│       │              │                │            │
-│  ┌────┴──────────────┴────────────────┴────────┐   │
-│  │           React Query Cache                  │   │
-│  └────────────────────┬─────────────────────────┘   │
-└───────────────────────┼─────────────────────────────┘
-                        │
-┌───────────────────────┼─────────────────────────────┐
-│                Next.js 16 App Router                 │
-│  ┌──────────────┐     │     ┌───────────────────┐   │
-│  │ Server       │─────┼─────│ Client Components │   │
-│  │ Components   │     │     │ (Hooks, Context)  │   │
-│  └──────┬───────┘     │     └────────┬──────────┘   │
-│         │             │              │               │
-│  ┌──────┴────────────────────────────┴──────────┐    │
-│  │         Supabase SSR Client                   │    │
-│  └────────────────────┬─────────────────────────┘    │
-└───────────────────────┼─────────────────────────────┘
-                        │
-┌───────────────────────┼─────────────────────────────┐
-│                  Supabase                             │
-│  ┌──────────────┐     │     ┌───────────────────┐   │
-│  │ PostgreSQL   │─────┼─────│ Realtime          │   │
-│  │ + RLS        │     │     │ (WebSocket)       │   │
-│  └──────────────┘     │     └───────────────────┘   │
-│  ┌──────────────┐     │     ┌───────────────────┐   │
-│  │ Auth         │     │     │ Edge Functions    │   │
-│  └──────────────┘     │     └───────────────────┘   │
-└───────────────────────┼─────────────────────────────┘
-```
-
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for a deeper dive.
+| Doc | What's inside |
+|-----|---------------|
+| [Setup Guide](docs/SETUP.md) | Full setup from scratch — Supabase, env vars, schema, deploy |
+| [Architecture](docs/ARCHITECTURE.md) | System design, component tree, RLS model, key decisions |
 
 ---
 
-## 🗂 Project Structure
+## Scoring
 
-```
-.
-├── proxy.ts                        # Next.js 16 proxy (route protection)
-├── schema.sql                      # Database schema + RLS (source of truth)
-├── supabase/
-│   ├── seed.sql                    # Test data (2 workspaces, 18 tasks)
-│   └── functions/
-│       └── overdue-tasks/          # Edge Function
-├── src/
-│   ├── app/
-│   │   ├── (auth)/                 # Login & signup pages
-│   │   ├── (dashboard)/            # Workspace + project pages
-│   │   ├── auth/callback/          # PKCE auth callback
-│   │   └── api/overdue/            # Edge Function proxy route
-│   ├── components/
-│   │   ├── ui/                     # shadcn components (18 primitives)
-│   │   ├── layout/                 # Sidebar, nav, workspace switcher
-│   │   ├── workspaces/             # Create workspace dialog
-│   │   ├── projects/               # Project card, create dialog
-│   │   └── tasks/                  # Task list, detail panel, filters
-│   ├── hooks/                      # React Query hooks (7 hooks)
-│   ├── lib/
-│   │   ├── queries.ts              # Typed query functions
-│   │   ├── mutations.ts            # Typed mutation functions
-│   │   ├── actions.ts              # Server Actions (auth)
-│   │   └── supabase/               # Client, server, admin clients
-│   ├── providers/                  # React Query + Supabase providers
-│   └── stores/                     # Zustand store (workspace state)
-├── docs/
-│   ├── SETUP.md                    # Full setup guide
-│   └── ARCHITECTURE.md             # Architecture deep dive
-└── .github/workflows/ci.yml        # CI pipeline
-```
+<details>
+<summary><strong>Assignment Rubric</strong></summary>
 
----
+| Area | Points | Notes |
+|------|--------|-------|
+| Supabase + RLS | 25 | All 4 ops, workspace isolation, no leaks |
+| TypeScript | 20 | Zero `any`, generated types, typed hooks |
+| UI Quality | 20 | Consistent spacing, responsive, skeletons |
+| UX Quality | 15 | Inline editing, URL filters, loading/empty/error |
+| Code Architecture | 10 | Server/Client split, no prop drilling |
+| Optimistic UI (bonus) | 5 | Instant update + rollback with toast |
+| Edge Function (bonus) | 5 | Working endpoint, RLS enforced, UI button |
+| **Total** | **100** | |
 
-## 🔒 RLS Security Model
-
-Every table has policies for **all 4 operations** — SELECT, INSERT, UPDATE, DELETE.
-
-```
-workspaces
-├── SELECT → any workspace member
-├── INSERT → any authenticated user (auto-owner via trigger)
-├── UPDATE → workspace owner only
-└── DELETE → workspace owner only
-
-workspace_members
-├── SELECT → workspace members
-├── INSERT → workspace owner (or self on creation)
-├── UPDATE → workspace owner
-└── DELETE → workspace owner
-
-projects
-├── SELECT → workspace members
-├── INSERT → workspace members
-├── UPDATE → workspace members
-└── DELETE → workspace owner
-
-tasks
-├── SELECT → workspace members (via project lookup)
-├── INSERT → workspace members
-├── UPDATE → workspace members
-└── DELETE → workspace members
-```
-
-The key helper function `is_workspace_member()` checks `workspace_members` table — no user can access data outside their workspaces.
-
----
-
-## 🧠 Design Decisions
-
-### What I'd Defend
-- **React Query over raw Supabase hooks**: Cache invalidation, optimistic updates, deduplication
-- **Server Components first**: Auth checks and initial data fetch on server → smaller client bundle
-- **Zustand for global state**: Minimal boilerplate, works outside React tree
-- **CSS variables for theming**: shadcn-compatible, no config changes needed
-
-### What I'd Change With More Time
-- **Edge Function types**: A shared types package for Deno compatibility
-- **Testing**: Vitest for hooks/mutations, Playwright for E2E
-- **Virtual scrolling**: `@tanstack/react-virtual` for large task lists
-
----
-
-## 🐛 Known Issues
-
-| Issue | Workaround |
-|-------|-----------|
-| `user_profiles` table not in schema | App works fine without it — auth paths use `auth.users()` metadata. To add: `CREATE TABLE user_profiles (id UUID PRIMARY KEY REFERENCES auth.users(id), email TEXT, name TEXT);` |
-| Edge Function type assertion for `assignee` join | Scoped to Edge Function only, doesn't affect Next.js app |
-| Seed data needs real user UUIDs | Create a user via signup first, then replace placeholder UUIDs in `seed.sql` |
-
----
-
-## 📄 License
-
-Built for the Fullstack Engineer take-home assignment.
+</details>
 
 ---
 
 <div align="center">
-  <small>Made with ጊዜ by <a href="https://github.com/sud-s">sud-s</a></small>
+  <sub>Made with ጊዜ by <a href="https://github.com/sud-s">sud-s</a></sub>
 </div>
