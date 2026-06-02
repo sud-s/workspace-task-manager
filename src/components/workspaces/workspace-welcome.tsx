@@ -6,7 +6,7 @@ import { useEffect } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { CreateWorkspaceDialog } from "@/components/workspaces/create-workspace-dialog"
 
-export default function DashboardPage() {
+export function WorkspaceWelcome() {
   const router = useRouter()
   const { data: workspaces, isLoading } = useWorkspaces()
 
