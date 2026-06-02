@@ -70,37 +70,37 @@ export function CreateTaskDialog({ projectId, workspaceId }: CreateTaskDialogPro
           Add Task
         </Button>
       </DialogTrigger>
-      <DialogContent className="border-zinc-800 bg-zinc-950">
+      <DialogContent className="border-border bg-card">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle className="text-zinc-100">Create Task</DialogTitle>
-            <DialogDescription className="text-zinc-500">Add a new task to this project.</DialogDescription>
+            <DialogTitle className="text-card-foreground">Create Task</DialogTitle>
+            <DialogDescription className="text-muted-foreground">Add a new task to this project.</DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="create-task-title" className="text-xs font-medium text-zinc-400">Title</Label>
+              <Label htmlFor="create-task-title" className="text-xs font-medium text-muted-foreground">Title</Label>
               <Input
                 id="create-task-title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="What needs to be done?"
                 required
-                className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+                className="border-border bg-card/50 text-card-foreground placeholder:text-muted-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20"
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="create-task-description" className="text-xs font-medium text-zinc-400">Description</Label>
+              <Label htmlFor="create-task-description" className="text-xs font-medium text-muted-foreground">Description</Label>
               <Textarea
                 id="create-task-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Optional description"
                 rows={3}
-                className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20 resize-none"
+                className="border-border bg-card/50 text-card-foreground placeholder:text-muted-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20 resize-none"
               />
             </div>
             <div className="grid gap-2">
-              <Label className="text-xs font-medium text-zinc-400">Assignee</Label>
+              <Label className="text-xs font-medium text-muted-foreground">Assignee</Label>
               <TaskAssigneeSelect
                 workspaceId={workspaceId}
                 value={assigneeId}
@@ -108,18 +108,18 @@ export function CreateTaskDialog({ projectId, workspaceId }: CreateTaskDialogPro
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="create-task-due-date" className="text-xs font-medium text-zinc-400">Due Date</Label>
+              <Label htmlFor="create-task-due-date" className="text-xs font-medium text-muted-foreground">Due Date</Label>
               <Input
                 id="create-task-due-date"
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                className="border-zinc-800 bg-zinc-900/50 text-zinc-100 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+                className="border-border bg-card/50 text-card-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20"
               />
             </div>
           </div>
           <DialogFooter>
-            <Button type="button" variant="ghost" onClick={() => setOpen(false)} className="text-zinc-400 hover:text-zinc-200">
+            <Button type="button" variant="ghost" onClick={() => setOpen(false)} className="text-muted-foreground hover:text-card-foreground">
               Cancel
             </Button>
             <Button

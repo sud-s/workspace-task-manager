@@ -48,7 +48,7 @@ export function ProjectCard({ id, workspaceId, name, taskCounts }: ProjectCardPr
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="group relative h-full cursor-pointer overflow-hidden border-zinc-800/60 bg-gradient-to-br from-zinc-900/80 to-zinc-900/40 transition-all duration-200 hover:border-zinc-700/80"
+        className="group relative h-full cursor-pointer overflow-hidden border-border/60 bg-gradient-to-br from-card/80 to-card/40 transition-all duration-200 hover:border-border/80"
         style={{ transformStyle: "preserve-3d", transition: "transform 0.1s ease-out" }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/[0.03] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -59,21 +59,21 @@ export function ProjectCard({ id, workspaceId, name, taskCounts }: ProjectCardPr
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 ring-1 ring-emerald-500/20 group-hover:ring-emerald-500/30 transition-all">
                 <Layers className="h-4 w-4 text-emerald-400" />
               </div>
-              <CardTitle className="text-sm font-semibold text-zinc-100">
+              <CardTitle className="text-sm font-semibold text-card-foreground">
                 {name}
               </CardTitle>
             </div>
-            <ArrowRight className="h-4 w-4 text-zinc-600 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-emerald-400 group-hover:translate-x-0.5" />
+            <ArrowRight className="h-4 w-4 text-muted-foreground/60 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:text-emerald-400 group-hover:translate-x-0.5" />
           </div>
         </CardHeader>
         <CardContent className="relative">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-500">
+            <span className="text-xs text-muted-foreground">
               {totalTasks} {totalTasks === 1 ? "task" : "tasks"}
             </span>
-            <span className="text-xs text-zinc-600">{donePercent}%</span>
+            <span className="text-xs text-muted-foreground/60">{donePercent}%</span>
           </div>
-          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-zinc-800/80">
+          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-accent/80">
             <div
               className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400 transition-all duration-700 ease-out"
               style={{ width: `${donePercent}%` }}

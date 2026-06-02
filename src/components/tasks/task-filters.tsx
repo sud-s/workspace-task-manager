@@ -13,15 +13,15 @@ type TaskFiltersProps = {
 const statusStyles: Record<TaskStatus, { active: string; inactive: string }> = {
   todo: {
     active: "bg-amber-500/10 text-amber-400 border-amber-500/30",
-    inactive: "bg-zinc-800/50 text-zinc-400 border-zinc-700/50 hover:border-zinc-600/50 hover:text-zinc-300",
+    inactive: "bg-accent/50 text-muted-foreground border-border/50 hover:border-border/50 hover:text-card-foreground",
   },
   in_progress: {
     active: "bg-blue-500/10 text-blue-400 border-blue-500/30",
-    inactive: "bg-zinc-800/50 text-zinc-400 border-zinc-700/50 hover:border-zinc-600/50 hover:text-zinc-300",
+    inactive: "bg-accent/50 text-muted-foreground border-border/50 hover:border-border/50 hover:text-card-foreground",
   },
   done: {
     active: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
-    inactive: "bg-zinc-800/50 text-zinc-400 border-zinc-700/50 hover:border-zinc-600/50 hover:text-zinc-300",
+    inactive: "bg-accent/50 text-muted-foreground border-border/50 hover:border-border/50 hover:text-card-foreground",
   },
 }
 
@@ -60,7 +60,7 @@ export function TaskFilters({ workspaceId }: TaskFiltersProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <ListFilter className="h-3.5 w-3.5 text-zinc-500 mr-0.5" />
+      <ListFilter className="h-3.5 w-3.5 text-muted-foreground mr-0.5" />
       {(Object.entries(TASK_STATUS_LABELS) as [TaskStatus, string][]).map(
         ([status, label]) => {
           const isActive = currentStatus.includes(status)
@@ -85,7 +85,7 @@ export function TaskFilters({ workspaceId }: TaskFiltersProps) {
       <select
         value={currentAssignee}
         onChange={(e) => setFilter("assignee", e.target.value)}
-        className="h-7 rounded-lg border border-zinc-700/50 bg-zinc-800/50 px-2 text-xs text-zinc-400 shadow-sm focus:outline-none focus:border-zinc-600/50 hover:border-zinc-600/50 transition-colors"
+        className="h-7 rounded-lg border border-border/50 bg-accent/50 px-2 text-xs text-muted-foreground shadow-sm focus:outline-none focus:border-border/50 hover:border-border/50 transition-colors"
       >
         <option value="">All Assignees</option>
         {members?.map((member) => (
@@ -98,7 +98,7 @@ export function TaskFilters({ workspaceId }: TaskFiltersProps) {
       {hasFilters && (
         <button
           onClick={clearFilters}
-          className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium text-zinc-500 hover:text-zinc-300 transition-colors"
+          className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground hover:text-card-foreground transition-colors"
         >
           <X className="h-3 w-3" />
           Clear

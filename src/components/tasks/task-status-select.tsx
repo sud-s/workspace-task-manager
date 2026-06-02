@@ -23,16 +23,16 @@ const statusStyles: Record<TaskStatus, { color: string; dot: string }> = {
 export function TaskStatusSelect({ value, onChange }: TaskStatusSelectProps) {
   return (
     <Select value={value} onValueChange={(v) => onChange(v as TaskStatus)}>
-      <SelectTrigger className={`w-36 border-zinc-800 bg-zinc-900/50 ${statusStyles[value].color}`}>
+      <SelectTrigger className={`w-36 border-border bg-card/50 ${statusStyles[value].color}`}>
         <div className="flex items-center gap-2">
           <span className={`h-1.5 w-1.5 rounded-full ${statusStyles[value].dot}`} />
           <SelectValue />
         </div>
       </SelectTrigger>
-      <SelectContent className="border-zinc-800 bg-zinc-900">
+      <SelectContent className="border-border bg-card">
         {(Object.entries(TASK_STATUS_LABELS) as [TaskStatus, string][]).map(
           ([status, label]) => (
-            <SelectItem key={status} value={status} className={`${statusStyles[status].color} focus:bg-zinc-800 focus:text-white`}>
+            <SelectItem key={status} value={status} className={`${statusStyles[status].color} focus:bg-accent focus:text-accent-foreground`}>
               <div className="flex items-center gap-2">
                 <span className={`h-1.5 w-1.5 rounded-full ${statusStyles[status].dot}`} />
                 {label}

@@ -28,10 +28,10 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div className="space-y-8">
-        <Skeleton className="h-8 w-48 bg-zinc-800/50" />
+        <Skeleton className="h-8 w-48 bg-accent" />
         <div className="grid gap-6 md:grid-cols-2">
-          <Skeleton className="h-64 bg-zinc-800/50 rounded-xl" />
-          <Skeleton className="h-64 bg-zinc-800/50 rounded-xl" />
+          <Skeleton className="h-64 bg-accent rounded-xl" />
+          <Skeleton className="h-64 bg-accent rounded-xl" />
         </div>
       </div>
     )
@@ -40,7 +40,7 @@ export default function ProfilePage() {
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <p className="text-zinc-500">Could not load user profile.</p>
+        <p className="text-muted-foreground">Could not load user profile.</p>
       </div>
     )
   }
@@ -89,45 +89,45 @@ export default function ProfilePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-white">Profile</h1>
-        <p className="mt-1 text-sm text-zinc-500">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">Profile</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
           Manage your account settings
         </p>
       </div>
 
-      <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-800/50 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-border via-border/50 to-transparent" />
 
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 p-6">
+        <div className="rounded-xl border border-border/60 bg-card/40 p-6">
           <div className="flex items-center gap-2 mb-5">
             <User className="h-4 w-4 text-emerald-400" />
-            <h2 className="text-sm font-semibold text-zinc-100">Profile Information</h2>
+            <h2 className="text-sm font-semibold text-card-foreground">Profile Information</h2>
           </div>
 
           <form onSubmit={handleProfileSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="profile-email" className="text-xs font-medium text-zinc-400">Email</Label>
-              <div className="flex h-10 w-full items-center rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 text-sm text-zinc-500">
-                <Mail className="mr-2 h-3.5 w-3.5 text-zinc-600" />
+              <Label htmlFor="profile-email" className="text-xs font-medium text-muted-foreground">Email</Label>
+              <div className="flex h-10 w-full items-center rounded-lg border border-border bg-card/50 px-3 text-sm text-muted-foreground">
+                <Mail className="mr-2 h-3.5 w-3.5 text-muted-foreground/60" />
                 {email}
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="profile-name" className="text-xs font-medium text-zinc-400">Display Name</Label>
+              <Label htmlFor="profile-name" className="text-xs font-medium text-muted-foreground">Display Name</Label>
               <Input
                 id="profile-name"
                 defaultValue={displayName}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your name"
-                className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+                className="border-border bg-card/50 text-card-foreground placeholder:text-muted-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20"
               />
             </div>
 
             <div className="space-y-2">
-              <Label className="text-xs font-medium text-zinc-400">Member since</Label>
-              <div className="flex h-10 w-full items-center rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 text-sm text-zinc-500">
-                <Calendar className="mr-2 h-3.5 w-3.5 text-zinc-600" />
+              <Label className="text-xs font-medium text-muted-foreground">Member since</Label>
+              <div className="flex h-10 w-full items-center rounded-lg border border-border bg-card/50 px-3 text-sm text-muted-foreground">
+                <Calendar className="mr-2 h-3.5 w-3.5 text-muted-foreground/60" />
                 {createdAt ? formatDate(createdAt) : "Unknown"}
               </div>
             </div>
@@ -152,15 +152,15 @@ export default function ProfilePage() {
           </form>
         </div>
 
-        <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/40 p-6">
+        <div className="rounded-xl border border-border/60 bg-card/40 p-6">
           <div className="flex items-center gap-2 mb-5">
             <KeyRound className="h-4 w-4 text-emerald-400" />
-            <h2 className="text-sm font-semibold text-zinc-100">Change Password</h2>
+            <h2 className="text-sm font-semibold text-card-foreground">Change Password</h2>
           </div>
 
           <form onSubmit={handlePasswordSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="profile-password" className="text-xs font-medium text-zinc-400">
+              <Label htmlFor="profile-password" className="text-xs font-medium text-muted-foreground">
                 New Password
               </Label>
               <Input
@@ -169,7 +169,7 @@ export default function ProfilePage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Min. 6 characters"
-                className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+                className="border-border bg-card/50 text-card-foreground placeholder:text-muted-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20"
               />
             </div>
 

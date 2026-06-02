@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { useSupabase } from "@/providers/supabase-provider"
 import { Button } from "@/components/ui/button"
@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function LoginPage() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const supabase = useSupabase()
   const [email, setEmail] = useState("")
@@ -35,8 +34,7 @@ export default function LoginPage() {
     }
 
     setLoading(false)
-    router.push("/")
-    router.refresh()
+    window.location.href = "/"
   }
 
   return (

@@ -66,10 +66,10 @@ export function TaskCalendar({ projectId, workspaceId, filters }: TaskCalendarPr
     return (
       <div className="rounded-xl border border-border bg-card">
         <div className="p-4 space-y-4">
-          <Skeleton className="h-8 w-48 bg-zinc-800/50" />
+          <Skeleton className="h-8 w-48 bg-accent" />
           <div className="grid grid-cols-7 gap-1">
             {Array.from({ length: 35 }).map((_, i) => (
-              <Skeleton key={i} className="h-20 w-full bg-zinc-800/50" />
+              <Skeleton key={i} className="h-20 w-full bg-accent" />
             ))}
           </div>
         </div>

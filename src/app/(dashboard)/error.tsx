@@ -24,10 +24,10 @@ export default function DashboardError({
           />
         </svg>
       </div>
-      <h1 className="mt-4 text-lg font-semibold text-zinc-100">
+      <h1 className="mt-4 text-lg font-semibold text-foreground">
         Something went wrong
       </h1>
-      <p className="mt-2 max-w-md text-sm text-zinc-500">
+      <p className="mt-2 max-w-md text-sm text-muted-foreground">
         {error.message || "An unexpected error occurred while loading this page."}
       </p>
       <button

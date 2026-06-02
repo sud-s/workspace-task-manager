@@ -40,22 +40,22 @@ export function WorkspaceSwitcher() {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800/50 hover:text-zinc-100"
+            className="w-full justify-between border-border bg-card/50 hover:bg-accent/50 hover:text-card-foreground"
           >
             <div className="flex items-center gap-2 truncate">
               <Layers className="h-4 w-4 shrink-0 text-emerald-400" />
-              <span className="truncate text-zinc-300">
+              <span className="truncate text-card-foreground">
                 {isLoading
                   ? "Loading..."
                   : activeWorkspace?.name ?? "Select workspace"}
               </span>
             </div>
-            <ChevronsUpDown className="h-4 w-4 shrink-0 text-zinc-600" />
+            <ChevronsUpDown className="h-4 w-4 shrink-0 text-muted-foreground" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-2 border-zinc-800 bg-zinc-900" align="start">
+        <PopoverContent className="w-[200px] p-2 border-border bg-card" align="start">
           <div className="space-y-1">
-            <p className="px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
+            <p className="px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
               Workspaces
             </p>
             {workspaces?.map((workspace) => (
@@ -65,8 +65,8 @@ export function WorkspaceSwitcher() {
                 className={cn(
                   "flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors",
                   activeWorkspace?.id === workspace.id
-                    ? "bg-zinc-800 text-zinc-100"
-                    : "text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-200",
+                    ? "bg-accent text-accent-foreground"
+                    : "text-muted-foreground hover:bg-accent/50 hover:text-card-foreground",
                 )}
               >
                 <Check
@@ -80,9 +80,9 @@ export function WorkspaceSwitcher() {
                 <span className="truncate">{workspace.name}</span>
               </button>
             ))}
-            <div className="border-t border-zinc-800 pt-2 mt-2">
+            <div className="border-t border-border pt-2 mt-2">
               <CreateWorkspaceDialog>
-                <button className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-zinc-400 transition-colors hover:bg-zinc-800/50 hover:text-zinc-200">
+                <button className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent/50 hover:text-card-foreground">
                   <Plus className="h-4 w-4" />
                   New Workspace
                 </button>

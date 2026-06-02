@@ -31,27 +31,27 @@ export function TaskItem({ task, onClick }: TaskItemProps) {
 
   return (
     <div
-      className={`group flex items-center gap-3 rounded-lg border border-zinc-800/60 bg-zinc-900/40 px-4 py-3 transition-all duration-200 hover:bg-zinc-800/40 hover:border-zinc-700/60 cursor-pointer border-l-2 ${cfg.border}`}
+      className={`group flex items-center gap-3 rounded-lg border border-border/60 bg-card/40 px-4 py-3 transition-all duration-200 hover:bg-accent/40 hover:border-border/60 cursor-pointer border-l-2 ${cfg.border}`}
       onClick={onClick}
     >
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${cfg.dot}`} />
           <p className={`text-sm font-medium truncate ${
-            task.status === "done" ? "text-zinc-500 line-through" : "text-zinc-100"
+            task.status === "done" ? "text-muted-foreground line-through" : "text-card-foreground"
           }`}>
             {task.title}
           </p>
         </div>
         <div className="mt-1 flex items-center gap-3 pl-3.5">
           {task.due_date && (
-            <span className="flex items-center gap-1 text-[11px] text-zinc-500">
+            <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
               <Calendar className="h-3 w-3" />
               {formatDate(task.due_date)}
             </span>
           )}
           {task.description && (
-            <span className="flex items-center gap-1 text-[11px] text-zinc-600">
+            <span className="flex items-center gap-1 text-[11px] text-muted-foreground/60">
               <MessageSquareText className="h-3 w-3" />
             </span>
           )}

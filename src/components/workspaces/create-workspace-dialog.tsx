@@ -43,17 +43,17 @@ export function CreateWorkspaceDialog({ children }: CreateWorkspaceDialogProps) 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {children && <DialogTrigger asChild>{children}</DialogTrigger>}
-      <DialogContent className="border-zinc-800 bg-zinc-950">
+      <DialogContent className="border-border bg-card">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle className="text-zinc-100">Create workspace</DialogTitle>
-            <DialogDescription className="text-zinc-500">
+            <DialogTitle className="text-card-foreground">Create workspace</DialogTitle>
+            <DialogDescription className="text-muted-foreground">
               Create a new workspace to organize your projects and tasks.
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="name-ws" className="text-xs font-medium text-zinc-400">Name</Label>
+              <Label htmlFor="name-ws" className="text-xs font-medium text-muted-foreground">Name</Label>
               <Input
                 id="name-ws"
                 placeholder="My Workspace"
@@ -61,7 +61,7 @@ export function CreateWorkspaceDialog({ children }: CreateWorkspaceDialogProps) 
                 onChange={(e) => setName(e.target.value)}
                 disabled={createWorkspace.isPending}
                 autoFocus
-                className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+                className="border-border bg-card/50 text-card-foreground placeholder:text-muted-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20"
               />
             </div>
           </div>
@@ -71,7 +71,7 @@ export function CreateWorkspaceDialog({ children }: CreateWorkspaceDialogProps) 
               variant="ghost"
               onClick={() => setOpen(false)}
               disabled={createWorkspace.isPending}
-              className="text-zinc-400 hover:text-zinc-200"
+              className="text-muted-foreground hover:text-card-foreground"
             >
               Cancel
             </Button>

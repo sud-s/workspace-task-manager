@@ -68,16 +68,16 @@ export default function MembersPage({ params }: PageProps) {
   return (
     <div className="space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Members</h1>
-        <p className="mt-0.5 text-xs sm:text-sm text-zinc-500">
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">Members</h1>
+        <p className="mt-0.5 text-xs sm:text-sm text-muted-foreground">
           Manage who has access to this workspace
         </p>
       </div>
 
-      <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-800/50 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-border via-border/50 to-transparent" />
 
-      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4 sm:p-6 backdrop-blur-sm">
-        <h3 className="flex items-center gap-2 text-sm font-semibold text-zinc-300 mb-4">
+      <div className="rounded-xl border border-border/60 bg-card/30 p-4 sm:p-6 backdrop-blur-sm">
+        <h3 className="flex items-center gap-2 text-sm font-semibold text-card-foreground mb-4">
           <UserPlus className="h-4 w-4 text-emerald-400" />
           Invite Member
         </h3>
@@ -88,7 +88,7 @@ export default function MembersPage({ params }: PageProps) {
             value={inviteEmail}
             onChange={(e) => setInviteEmail(e.target.value)}
             required
-            className="w-full sm:max-w-sm border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+            className="w-full sm:max-w-sm border-border bg-card/50 text-card-foreground placeholder:text-muted-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20"
           />
           <Button
             type="submit"
@@ -105,30 +105,30 @@ export default function MembersPage({ params }: PageProps) {
 
       {isLoading ? (
         <div className="space-y-3">
-          <Skeleton className="h-16 w-full bg-zinc-800/50 rounded-xl" />
-          <Skeleton className="h-16 w-full bg-zinc-800/50 rounded-xl" />
+          <Skeleton className="h-16 w-full bg-accent rounded-xl" />
+          <Skeleton className="h-16 w-full bg-accent rounded-xl" />
         </div>
       ) : members && members.length > 0 ? (
         <div className="space-y-2">
           {members.map((member) => (
             <div
               key={member.user_id}
-              className="flex items-center justify-between rounded-xl border border-zinc-800/60 bg-zinc-900/30 px-5 py-4 backdrop-blur-sm"
+              className="flex items-center justify-between rounded-xl border border-border/60 bg-card/30 px-5 py-4 backdrop-blur-sm"
             >
               <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-800/50 ring-1 ring-zinc-700/50">
-                  <User className="h-5 w-5 text-zinc-400" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/50 ring-1 ring-border/50">
+                  <User className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-zinc-200">
+                  <p className="text-sm font-medium text-card-foreground">
                     {userEmails[member.user_id] ?? member.user_id.slice(0, 8) + "..."}
                   </p>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-zinc-800/80 px-2.5 py-0.5 text-[11px] font-medium text-zinc-400">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-accent/80 px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
                       {member.role === "owner" ? (
                         <Shield className="h-3 w-3 text-amber-400" />
                       ) : (
-                        <Shield className="h-3 w-3 text-zinc-500" />
+                        <Shield className="h-3 w-3 text-muted-foreground" />
                       )}
                       {member.role}
                     </span>
@@ -145,7 +145,7 @@ export default function MembersPage({ params }: PageProps) {
                       userId: member.user_id,
                     })
                   }
-                  className="h-8 w-8 text-zinc-500 hover:text-red-400 hover:bg-red-500/10"
+                  className="h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>
@@ -155,11 +155,11 @@ export default function MembersPage({ params }: PageProps) {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-800/50 ring-1 ring-zinc-700/50 mb-4">
-            <Users className="h-6 w-6 text-zinc-500" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/50 ring-1 ring-border/50 mb-4">
+            <Users className="h-6 w-6 text-muted-foreground" />
           </div>
-          <h3 className="text-sm font-medium text-zinc-400">No members</h3>
-          <p className="mt-1 text-xs text-zinc-600">
+          <h3 className="text-sm font-medium text-muted-foreground">No members</h3>
+          <p className="mt-1 text-xs text-muted-foreground/60">
             Invite members to collaborate on this workspace.
           </p>
         </div>

@@ -115,9 +115,9 @@ export function TaskBoard({ projectId, workspaceId, filters }: TaskBoardProps) {
       <div className="grid grid-cols-3 gap-4">
         {COLUMNS.map((status) => (
           <div key={status} className="space-y-3">
-            <Skeleton className="h-5 w-24 bg-zinc-800/50" />
-            <Skeleton className="h-24 w-full bg-zinc-800/50" />
-            <Skeleton className="h-24 w-full bg-zinc-800/50" />
+            <Skeleton className="h-5 w-24 bg-accent" />
+            <Skeleton className="h-24 w-full bg-accent" />
+            <Skeleton className="h-24 w-full bg-accent" />
           </div>
         ))}
       </div>

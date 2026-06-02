@@ -51,7 +51,7 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
         <Separator className="my-3 bg-border/50" />
 
         <div className="flex items-center justify-between px-3 py-1.5">
-          <span className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
+          <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
             Projects
           </span>
           <CreateProjectDialog workspaceId={currentWorkspaceId ?? ""}>

@@ -40,21 +40,21 @@ export function OverdueTasksButton({ projectId }: OverdueTasksButtonProps) {
       </Button>
 
       {showOverdue && overdueTasks && overdueTasks.length > 0 && (
-        <div className="absolute top-full mt-2 right-0 z-50 w-80 rounded-xl border border-zinc-800 bg-zinc-900 p-4 shadow-2xl shadow-black/50 backdrop-blur-xl">
-          <h4 className="text-sm font-semibold text-zinc-100 mb-3">Overdue Tasks</h4>
+        <div className="absolute top-full mt-2 right-0 z-50 w-80 rounded-xl border border-border bg-card p-4 shadow-2xl shadow-black/50 backdrop-blur-xl">
+          <h4 className="text-sm font-semibold text-card-foreground mb-3">Overdue Tasks</h4>
           <div className="space-y-2">
             {overdueTasks.map((task) => (
               <div
                 key={task.id}
                 className="rounded-lg border border-red-500/10 bg-red-500/5 px-3 py-2.5 text-sm"
               >
-                <p className="font-medium text-zinc-200">{task.title}</p>
-                <div className="mt-1 flex items-center gap-2 text-xs text-zinc-500">
+                <p className="font-medium text-card-foreground">{task.title}</p>
+                <div className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
                   <span>Due {formatDate(task.due_date)}</span>
                   {task.assignee_name && (
                     <>
                       <span>&middot;</span>
-                      <span className="text-zinc-400">{task.assignee_name}</span>
+                      <span className="text-muted-foreground/80">{task.assignee_name}</span>
                     </>
                   )}
                 </div>

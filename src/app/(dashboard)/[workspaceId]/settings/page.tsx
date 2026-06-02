@@ -47,8 +47,8 @@ export default function SettingsPage({ params }: PageProps) {
   if (isLoading) {
     return (
       <div className="space-y-6">
-        <Skeleton className="h-8 w-48 bg-zinc-800/50" />
-        <Skeleton className="h-40 w-full bg-zinc-800/50 rounded-xl" />
+        <Skeleton className="h-8 w-48 bg-accent" />
+        <Skeleton className="h-40 w-full bg-accent rounded-xl" />
       </div>
     )
   }
@@ -59,8 +59,8 @@ export default function SettingsPage({ params }: PageProps) {
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 ring-1 ring-amber-500/20 mb-4">
           <Settings className="h-6 w-6 text-amber-400" />
         </div>
-        <h2 className="text-lg font-semibold text-zinc-200">Workspace not found</h2>
-        <p className="mt-1 text-sm text-zinc-500">
+        <h2 className="text-lg font-semibold text-foreground">Workspace not found</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
           This workspace doesn&apos;t exist, was deleted, or you don&apos;t have access.
         </p>
       </div>
@@ -72,31 +72,31 @@ export default function SettingsPage({ params }: PageProps) {
       <div className="flex items-center gap-3 sm:gap-4">
         <Link
           href={`/${workspaceId}`}
-          className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50 transition-all shrink-0"
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:text-card-foreground hover:bg-accent/50 transition-all shrink-0"
         >
           <ArrowLeft className="h-4 w-4" />
         </Link>
         <div className="min-w-0">
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Settings</h1>
-          <p className="mt-0.5 text-xs sm:text-sm text-zinc-500">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">Settings</h1>
+          <p className="mt-0.5 text-xs sm:text-sm text-muted-foreground">
             Manage workspace settings
           </p>
         </div>
       </div>
 
-      <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-800/50 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-border via-border/50 to-transparent" />
 
-      <div className="rounded-xl border border-zinc-800/60 bg-zinc-900/30 p-4 sm:p-6 backdrop-blur-sm max-w-lg">
-        <h3 className="text-sm font-semibold text-zinc-300 mb-4">Workspace Name</h3>
+      <div className="rounded-xl border border-border/60 bg-card/30 p-4 sm:p-6 backdrop-blur-sm max-w-lg">
+        <h3 className="text-sm font-semibold text-card-foreground mb-4">Workspace Name</h3>
         <form onSubmit={handleSave} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name" className="text-xs font-medium text-zinc-400">Name</Label>
+            <Label htmlFor="name" className="text-xs font-medium text-muted-foreground">Name</Label>
             <Input
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+              className="border-border bg-card/50 text-card-foreground placeholder:text-muted-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20"
             />
           </div>
           <Button
@@ -115,7 +115,7 @@ export default function SettingsPage({ params }: PageProps) {
           <Trash2 className="h-4 w-4" />
           Danger Zone
         </h3>
-        <p className="text-xs text-zinc-500 mb-4">
+        <p className="text-xs text-muted-foreground mb-4">
           Once you delete this workspace, there is no going back. All projects and tasks will be permanently removed.
         </p>
         <Button

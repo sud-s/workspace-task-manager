@@ -31,12 +31,12 @@ export default function WorkspaceDashboardPage() {
     return (
       <div className="space-y-6">
         <div>
-          <Skeleton className="h-8 w-48 bg-zinc-800/50" />
-          <Skeleton className="h-4 w-24 mt-2 bg-zinc-800/50" />
+          <Skeleton className="h-8 w-48 bg-accent" />
+          <Skeleton className="h-4 w-24 mt-2 bg-accent" />
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Skeleton className="h-40 bg-zinc-800/50 rounded-xl" />
-          <Skeleton className="h-40 bg-zinc-800/50 rounded-xl" />
+          <Skeleton className="h-40 bg-accent rounded-xl" />
+          <Skeleton className="h-40 bg-accent rounded-xl" />
         </div>
       </div>
     )
@@ -48,11 +48,11 @@ export default function WorkspaceDashboardPage() {
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 ring-1 ring-amber-500/20 mb-4">
           <FolderKanban className="h-6 w-6 text-amber-400" />
         </div>
-        <h2 className="text-lg font-semibold text-zinc-200">Workspace not found</h2>
-        <p className="mt-1 text-sm text-zinc-500">
+        <h2 className="text-lg font-semibold text-foreground">Workspace not found</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
           This workspace doesn&apos;t exist, was deleted, or you don&apos;t have access.
         </p>
-        <p className="mt-2 text-xs text-zinc-600">
+        <p className="mt-2 text-xs text-muted-foreground/60">
           Select a workspace from the sidebar or create a new one.
         </p>
       </div>
@@ -63,7 +63,7 @@ export default function WorkspaceDashboardPage() {
     <div className="space-y-6 sm:space-y-8">
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white truncate">{workspace.name}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground truncate">{workspace.name}</h1>
           <p className="mt-0.5 text-xs sm:text-sm text-zinc-500">
             {projects ? `${projects.length} ${projects.length === 1 ? "project" : "projects"}` : "Loading projects..."}
           </p>
@@ -71,12 +71,12 @@ export default function WorkspaceDashboardPage() {
         <CreateProjectDialog workspaceId={workspaceId} />
       </div>
 
-      <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-800/50 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-border via-border/50 to-transparent" />
 
       {projLoading ? (
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          <Skeleton className="h-40 bg-zinc-800/50 rounded-xl" />
-          <Skeleton className="h-40 bg-zinc-800/50 rounded-xl" />
+          <Skeleton className="h-40 bg-accent rounded-xl" />
+          <Skeleton className="h-40 bg-accent rounded-xl" />
         </div>
       ) : projects && projects.length > 0 ? (
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -92,11 +92,11 @@ export default function WorkspaceDashboardPage() {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-800/50 ring-1 ring-zinc-700/50 mb-4">
-            <FolderKanban className="h-6 w-6 text-zinc-500" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/50 ring-1 ring-border/50 mb-4">
+            <FolderKanban className="h-6 w-6 text-muted-foreground" />
           </div>
-          <h3 className="text-sm font-medium text-zinc-400">No projects yet</h3>
-          <p className="mt-1 text-xs text-zinc-600">
+          <h3 className="text-sm font-medium text-muted-foreground">No projects yet</h3>
+          <p className="mt-1 text-xs text-muted-foreground/60">
             Create your first project to get started.
           </p>
         </div>

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useSupabase } from "@/providers/supabase-provider"
 import { Button } from "@/components/ui/button"
@@ -9,7 +8,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function SignupPage() {
-  const router = useRouter()
   const supabase = useSupabase()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -37,8 +35,7 @@ export default function SignupPage() {
       return
     }
 
-    router.push("/")
-    router.refresh()
+    window.location.href = "/"
   }
 
   return (

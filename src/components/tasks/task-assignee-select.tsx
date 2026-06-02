@@ -23,18 +23,18 @@ export function TaskAssigneeSelect({ workspaceId, value, onChange }: TaskAssigne
       value={value ?? "unassigned"}
       onValueChange={(v) => onChange(v === "unassigned" ? null : v)}
     >
-      <SelectTrigger className="w-full border-zinc-800 bg-zinc-900/50 text-zinc-100">
+      <SelectTrigger className="w-full border-border bg-card/50 text-card-foreground">
         <SelectValue placeholder="Assign to..." />
       </SelectTrigger>
-      <SelectContent className="border-zinc-800 bg-zinc-900 text-zinc-100">
-        <SelectItem value="unassigned" className="focus:bg-zinc-800 focus:text-white">Unassigned</SelectItem>
+      <SelectContent className="border-border bg-card text-card-foreground">
+        <SelectItem value="unassigned" className="focus:bg-accent focus:text-accent-foreground">Unassigned</SelectItem>
         {isLoading && (
-          <SelectItem value="loading" disabled className="text-zinc-500">
+          <SelectItem value="loading" disabled className="text-muted-foreground">
             Loading members...
           </SelectItem>
         )}
         {members?.map((member) => (
-          <SelectItem key={member.user_id} value={member.user_id} className="focus:bg-zinc-800 focus:text-white">
+          <SelectItem key={member.user_id} value={member.user_id} className="focus:bg-accent focus:text-accent-foreground">
             {member.user_id.slice(0, 8)}
           </SelectItem>
         ))}

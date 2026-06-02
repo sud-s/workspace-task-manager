@@ -43,26 +43,26 @@ export function TaskDetailPanel({ taskId, workspaceId, projectId, onClose }: Tas
 
   return (
     <Sheet open={!!taskId} onOpenChange={(open) => { if (!open) onClose() }}>
-      <SheetContent key={taskId ?? "closed"} className="overflow-y-auto border-l border-zinc-800/60 bg-zinc-950/95 backdrop-blur-xl">
+      <SheetContent key={taskId ?? "closed"} className="overflow-y-auto border-l border-border/60 bg-background/95 backdrop-blur-xl">
         {isLoading && !cachedTask && (
           <div className="space-y-4 pt-6">
-            <Skeleton className="h-7 w-3/4 bg-zinc-800/50" />
-            <Skeleton className="h-24 w-full bg-zinc-800/50" />
-            <Skeleton className="h-10 w-full bg-zinc-800/50" />
-            <Skeleton className="h-10 w-full bg-zinc-800/50" />
+            <Skeleton className="h-7 w-3/4 bg-accent" />
+            <Skeleton className="h-24 w-full bg-accent" />
+            <Skeleton className="h-10 w-full bg-accent" />
+            <Skeleton className="h-10 w-full bg-accent" />
           </div>
         )}
 
         {error && (
           <div className="flex flex-col items-center gap-2 pt-6 text-center">
             <p className="text-sm text-destructive">Failed to load task</p>
-            <p className="text-xs text-zinc-500">{error.message}</p>
+            <p className="text-xs text-muted-foreground">{error.message}</p>
           </div>
         )}
 
         {!isLoading && !error && !task && taskId && (
           <div className="pt-6 text-center">
-            <p className="text-sm text-zinc-500">Task not found</p>
+            <p className="text-sm text-muted-foreground">Task not found</p>
           </div>
         )}
 
@@ -123,37 +123,37 @@ function TaskDetailForm({ task, members }: TaskDetailFormProps) {
 
   return (
     <form onSubmit={handleSave} className="flex flex-col min-h-full">
-      <SheetHeader className="pb-6 border-b border-zinc-800/50">
-        <SheetTitle className="text-lg text-zinc-100">Edit Task</SheetTitle>
-        <SheetDescription className="text-xs text-zinc-500">
+      <SheetHeader className="pb-6 border-b border-border/50">
+        <SheetTitle className="text-lg text-card-foreground">Edit Task</SheetTitle>
+        <SheetDescription className="text-xs text-muted-foreground">
           Created {formatDate(task.created_at)}
         </SheetDescription>
       </SheetHeader>
 
       <div className="flex-1 space-y-5 py-6">
         <div className="space-y-2">
-          <Label htmlFor="detail-title" className="text-xs font-medium text-zinc-400">Title</Label>
+          <Label htmlFor="detail-title" className="text-xs font-medium text-muted-foreground">Title</Label>
           <Input
             id="detail-title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+            className="border-border bg-card/50 text-card-foreground placeholder:text-muted-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="detail-description" className="text-xs font-medium text-zinc-400">Description</Label>
+          <Label htmlFor="detail-description" className="text-xs font-medium text-muted-foreground">Description</Label>
           <Textarea
             id="detail-description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
-            className="border-zinc-800 bg-zinc-900/50 text-zinc-100 placeholder:text-zinc-600 focus:border-emerald-500/30 focus:ring-emerald-500/20 resize-none"
+            className="border-border bg-card/50 text-card-foreground placeholder:text-muted-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20 resize-none"
           />
         </div>
 
         <div className="space-y-2">
-          <Label className="text-xs font-medium text-zinc-400">Status</Label>
+          <Label className="text-xs font-medium text-muted-foreground">Status</Label>
           <TaskStatusSelect
             value={status}
             onChange={(s) => setStatus(s)}
@@ -161,12 +161,12 @@ function TaskDetailForm({ task, members }: TaskDetailFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="detail-assignee" className="text-xs font-medium text-zinc-400">Assignee</Label>
+          <Label htmlFor="detail-assignee" className="text-xs font-medium text-muted-foreground">Assignee</Label>
           <select
             id="detail-assignee"
             value={assigneeId ?? ""}
             onChange={(e) => setAssigneeId(e.target.value || null)}
-            className="flex h-10 w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-sm text-zinc-100 shadow-sm transition-colors focus:outline-none focus:border-emerald-500/30 focus:ring-1 focus:ring-emerald-500/20"
+            className="flex h-10 w-full rounded-lg border border-border bg-card/50 px-3 py-2 text-sm text-card-foreground shadow-sm transition-colors focus:outline-none focus:border-emerald-500/30 focus:ring-1 focus:ring-emerald-500/20"
           >
             <option value="">Unassigned</option>
             {members?.map((member) => (
@@ -178,20 +178,20 @@ function TaskDetailForm({ task, members }: TaskDetailFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="detail-due-date" className="text-xs font-medium text-zinc-400">Due Date</Label>
+          <Label htmlFor="detail-due-date" className="text-xs font-medium text-muted-foreground">Due Date</Label>
           <Input
             id="detail-due-date"
             type="date"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
-            className="border-zinc-800 bg-zinc-900/50 text-zinc-100 focus:border-emerald-500/30 focus:ring-emerald-500/20"
+            className="border-border bg-card/50 text-card-foreground focus:border-emerald-500/30 focus:ring-emerald-500/20"
           />
         </div>
       </div>
 
-      <SheetFooter className="border-t border-zinc-800/50 pt-4">
+      <SheetFooter className="border-t border-border/50 pt-4">
         {hasChanges && (
-          <Button type="button" variant="ghost" onClick={handleCancel} className="text-zinc-400 hover:text-zinc-200">
+          <Button type="button" variant="ghost" onClick={handleCancel} className="text-muted-foreground hover:text-card-foreground">
             Cancel
           </Button>
         )}

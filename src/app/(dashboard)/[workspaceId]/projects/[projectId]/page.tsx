@@ -62,10 +62,10 @@ export default function ProjectPage({ params }: PageProps) {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="min-w-0">
           {projectLoading ? (
-            <Skeleton className="h-8 w-48 bg-zinc-800/50" />
+            <Skeleton className="h-8 w-48 bg-accent" />
           ) : (
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white truncate">
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground truncate">
                 {project?.name ?? "Project"}
               </h1>
             </div>
@@ -95,7 +95,7 @@ export default function ProjectPage({ params }: PageProps) {
         </div>
       </div>
 
-      <div className="h-px bg-gradient-to-r from-zinc-800 via-zinc-800/50 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-border via-border/50 to-transparent" />
 
       <TaskFilters workspaceId={workspaceId} />
 

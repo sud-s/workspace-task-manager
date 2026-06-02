@@ -44,10 +44,10 @@ export function UserNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium text-zinc-100">
+            <p className="text-sm font-medium text-card-foreground">
               {displayName ?? "User"}
             </p>
-            <p className="text-xs text-zinc-500">{email}</p>
+            <p className="text-xs text-muted-foreground">{email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
