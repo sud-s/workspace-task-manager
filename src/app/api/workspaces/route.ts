@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { createServerSupabase } from "@/lib/supabase/server"
+import { createAdminSupabase } from "@/lib/supabase/admin"
 
 export async function POST(request: Request) {
   try {
@@ -14,7 +15,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "name is required" }, { status: 400 })
     }
 
-    const { data: workspace, error: wsError } = await supabase
+    const admin = createAdminSupabase()
+
+    const { data: workspace, error: wsError } = await admin
       .from("workspaces")
       .insert({ name })
       .select("*")
@@ -22,6 +25,14 @@ export async function POST(request: Request) {
 
     if (wsError) {
       return NextResponse.json({ error: wsError.message }, { status: 500 })
+    }
+
+    const { error: memberError } = await admin
+      .from("workspace_members")
+      .insert({ workspace_id: workspace.id, user_id: user.id, role: "owner" })
+
+    if (memberError && !memberError.message.includes("duplicate key")) {
+      return NextResponse.json({ error: memberError.message }, { status: 500 })
     }
 
     return NextResponse.json({ workspace })
