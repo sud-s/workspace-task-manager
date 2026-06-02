@@ -227,6 +227,32 @@ CREATE POLICY "Members can delete tasks"
   );
 
 -- ============================================================
+-- RPC: create workspace with owner membership (bypasses RLS chicken-and-egg)
+-- ============================================================
+
+CREATE OR REPLACE FUNCTION public.create_workspace(workspace_name text)
+RETURNS json
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = ''
+AS $$
+DECLARE
+  new_workspace public.workspaces;
+  user_id uuid;
+BEGIN
+  user_id := auth.uid();
+  IF user_id IS NULL THEN
+    RAISE EXCEPTION 'Not authenticated';
+  END IF;
+  INSERT INTO public.workspaces (name) VALUES (workspace_name)
+    RETURNING * INTO new_workspace;
+  INSERT INTO public.workspace_members (workspace_id, user_id, role)
+    VALUES (new_workspace.id, user_id, 'owner');
+  RETURN row_to_json(new_workspace)::json;
+END;
+$$;
+
+-- ============================================================
 -- TRIGGER: auto-add creator as owner on workspace creation
 -- ============================================================
 
