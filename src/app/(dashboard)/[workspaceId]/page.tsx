@@ -45,12 +45,15 @@ export default function WorkspaceDashboardPage() {
   if (wsError || !workspace) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/10 ring-1 ring-red-500/20 mb-4">
-          <FolderKanban className="h-6 w-6 text-red-400" />
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 ring-1 ring-amber-500/20 mb-4">
+          <FolderKanban className="h-6 w-6 text-amber-400" />
         </div>
         <h2 className="text-lg font-semibold text-zinc-200">Workspace not found</h2>
         <p className="mt-1 text-sm text-zinc-500">
-          This workspace may have been deleted or you don&apos;t have access.
+          This workspace doesn&apos;t exist, was deleted, or you don&apos;t have access.
+        </p>
+        <p className="mt-2 text-xs text-zinc-600">
+          Select a workspace from the sidebar or create a new one.
         </p>
       </div>
     )

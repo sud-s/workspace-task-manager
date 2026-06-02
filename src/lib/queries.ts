@@ -73,7 +73,7 @@ export async function getWorkspace(
     .from("workspaces")
     .select("id, name, created_at")
     .eq("id", workspaceId)
-    .single()
+    .maybeSingle()
 
   if (error) throw new Error(error.message)
   return data
