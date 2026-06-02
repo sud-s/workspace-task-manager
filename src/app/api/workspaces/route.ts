@@ -27,18 +27,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: wsError.message }, { status: 500 })
     }
 
-    const { error: memberError } = await admin
-      .from("workspace_members")
-      .insert({
-        workspace_id: workspace.id,
-        user_id: user.id,
-        role: "owner",
-      })
-
-    if (memberError) {
-      return NextResponse.json({ error: memberError.message }, { status: 500 })
-    }
-
     return NextResponse.json({ workspace })
   } catch (err) {
     return NextResponse.json(
