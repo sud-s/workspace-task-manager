@@ -2,7 +2,7 @@
   <br />
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/sud-s/workspace-task-manager/main/assets/logo-dark.svg">
-    <img alt="Gize" src="https://raw.githubusercontent.com/sud-s/workspace-task-manager/main/assets/logo-light.svg" width="320">
+    <img alt="Gize" src="https://raw.githubusercontent.com/sud-s/workspace-task-manager/main/assets/logo-light.svg" width="200">
   </picture>
   <br />
   <em>Multi-workspace task manager with real-time sync</em>
