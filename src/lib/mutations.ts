@@ -24,6 +24,7 @@ export async function createWorkspace(
   client: QueryClient,
   name: string,
 ): Promise<WorkspaceRow> {
+  // @ts-expect-error -- rpc args not typed in generated Supabase types
   const { data, error } = await client.rpc("create_workspace", {
     workspace_name: name,
   })
