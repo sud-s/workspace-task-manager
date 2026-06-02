@@ -30,7 +30,39 @@
 
 ---
 
-## Features
+## Quick Start
+
+**Prerequisites:** Node.js 22+, a Supabase project
+
+```bash
+# Clone and install
+git clone https://github.com/sud-s/workspace-task-manager.git
+cd workspace-task-manager
+npm install
+
+# Configure environment
+cp .env.example .env.local
+# Fill in your Supabase URL and keys
+
+# Start the dev server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see the app.
+
+To run the optional overdue-tasks backend:
+
+```bash
+cd backend
+npm install
+cp .env.example .env
+npm run dev
+```
+
+---
+
+<details>
+<summary>Features</summary>
 
 <table>
 <tr>
@@ -78,9 +110,30 @@
 </tr>
 </table>
 
----
+</details>
 
-## Architecture
+<details>
+<summary>Next Steps</summary>
+
+### In Progress
+- Dark/light theme toggle
+
+### Planned
+- Task detail view with activity log and comments
+- Drag-and-drop task board (Kanban-style)
+- Calendar view for tasks with due dates
+- Email notifications for task assignments and overdue items
+- File attachments on tasks
+- Webhook integrations for external tools
+- Mobile-responsive improvements for the task board
+- Performance optimization with virtual scrolling for large task lists
+- User notification preferences
+- Workspace-level analytics dashboard
+
+</details>
+
+<details>
+<summary>Architecture</summary>
 
 ```
   Vercel (Frontend)                     Supabase                    Render (Backend)
@@ -94,9 +147,10 @@
   └──────────────────────┘
 ```
 
----
+</details>
 
-## Tech Stack
+<details>
+<summary>Tech Stack</summary>
 
 | Layer | Technology |
 |-------|-----------|
@@ -110,40 +164,10 @@
 | Backend API | [Express](https://expressjs.com) on [Render](https://render.com) |
 | Deployment | [Vercel](https://vercel.com) (frontend) + [Render](https://render.com) (backend) |
 
----
+</details>
 
-## Quick Start
-
-**Prerequisites:** Node.js 22+, a Supabase project
-
-```bash
-# Clone and install
-git clone https://github.com/sud-s/workspace-task-manager.git
-cd workspace-task-manager
-npm install
-
-# Configure environment
-cp .env.example .env.local
-# Fill in your Supabase URL and keys
-
-# Start the dev server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see the app.
-
-To run the optional overdue-tasks backend:
-
-```bash
-cd backend
-npm install
-cp .env.example .env
-npm run dev
-```
-
----
-
-## Demo
+<details>
+<summary>Demo</summary>
 
 Try the live app at **[https://gize-pi.vercel.app](https://gize-pi.vercel.app)**
 
@@ -153,9 +177,10 @@ Try the live app at **[https://gize-pi.vercel.app](https://gize-pi.vercel.app)**
 
 The demo account includes pre-seeded workspaces, projects, and tasks so you can explore all features immediately.
 
----
+</details>
 
-## Project Status
+<details>
+<summary>Project Status</summary>
 
 - [x] Authentication (email/password, password reset)
 - [x] Multi-workspace architecture with RLS
@@ -168,14 +193,17 @@ The demo account includes pre-seeded workspaces, projects, and tasks so you can 
 - [x] Route protection and auth middleware
 - [x] Toast notifications for all mutations
 - [x] Error boundaries and loading states
+- [x] User profile page with account settings
+- [x] Profile dropdown in navigation
 - [x] SEO (sitemap, robots, metadata, favicon)
 - [x] Responsive landing page with dark theme
 - [x] CI pipeline (lint, type-check, build)
 - [x] Dockerized backend on Render
 
----
+</details>
 
-## Contributing
+<details>
+<summary>Contributing</summary>
 
 Contributions are welcome. Please read the [Contributing Guidelines](CONTRIBUTING.md) first.
 
@@ -185,11 +213,14 @@ Contributions are welcome. Please read the [Contributing Guidelines](CONTRIBUTIN
 4. Push to the branch (`git push origin feat/amazing-feature`)
 5. Open a Pull Request
 
----
+</details>
 
-## License
+<details>
+<summary>License</summary>
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+
+</details>
 
 ---
 
