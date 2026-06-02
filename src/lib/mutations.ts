@@ -127,6 +127,35 @@ export async function updateTaskStatus(
   return task
 }
 
+export async function updateWorkspace(
+  client: QueryClient,
+  workspaceId: string,
+  name: string,
+): Promise<WorkspaceRow> {
+  const { data, error } = await client
+    .from("workspaces")
+    .update({ name })
+    .eq("id", workspaceId)
+    .select("*")
+    .single()
+
+  if (error) throw new Error(error.message)
+  if (!data) throw new Error("Failed to update workspace")
+  return data
+}
+
+export async function deleteWorkspace(
+  client: QueryClient,
+  workspaceId: string,
+): Promise<void> {
+  const { error } = await client
+    .from("workspaces")
+    .delete()
+    .eq("id", workspaceId)
+
+  if (error) throw new Error(error.message)
+}
+
 export async function inviteMember(
   client: QueryClient,
   workspaceId: string,

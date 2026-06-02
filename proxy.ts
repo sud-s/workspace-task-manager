@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
 const protectedRoutes = ["/dashboard"]
-const authRoutes = ["/login", "/signup"]
+const authRoutes = ["/login", "/signup", "/forgot-password", "/reset-password"]
 
 function matchesProtectedRoute(pathname: string): boolean {
   if (protectedRoutes.includes(pathname)) return true

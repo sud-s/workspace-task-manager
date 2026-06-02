@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Plus } from "lucide-react"
+import { Home, Plus, Users, Settings } from "lucide-react"
 import { WorkspaceSwitcher } from "./workspace-switcher"
 import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
@@ -93,6 +93,42 @@ export function Sidebar() {
             No projects yet
           </p>
         )}
+
+        <Separator className="my-3 bg-zinc-800/50" />
+
+        <Link
+          href={currentWorkspaceId ? `/${currentWorkspaceId}/members` : "#"}
+          className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-zinc-800/60 hover:text-white ${
+            pathname.includes("/members")
+              ? "bg-zinc-800/60 text-white shadow-sm"
+              : "text-zinc-400"
+          }`}
+        >
+          <Users className={`h-4 w-4 transition-all ${
+            pathname.includes("/members") ? "text-emerald-400" : "text-zinc-500 group-hover:text-zinc-300"
+          }`} />
+          Members
+          {pathname.includes("/members") && (
+            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          )}
+        </Link>
+
+        <Link
+          href={currentWorkspaceId ? `/${currentWorkspaceId}/settings` : "#"}
+          className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-zinc-800/60 hover:text-white ${
+            pathname.includes("/settings")
+              ? "bg-zinc-800/60 text-white shadow-sm"
+              : "text-zinc-400"
+          }`}
+        >
+          <Settings className={`h-4 w-4 transition-all ${
+            pathname.includes("/settings") ? "text-emerald-400" : "text-zinc-500 group-hover:text-zinc-300"
+          }`} />
+          Settings
+          {pathname.includes("/settings") && (
+            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          )}
+        </Link>
       </nav>
 
       <div className="border-t border-zinc-800/50 p-3">
