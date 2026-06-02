@@ -15,8 +15,30 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Gize — Task Manager",
-  description: "Multi-workspace task management app",
+  title: {
+    default: "Gize — Time is everything",
+    template: "%s — Gize",
+  },
+  description:
+    "Multi-workspace task management app. Organize projects, track tasks in real-time, and keep your team aligned.",
+  keywords: [
+    "task management",
+    "project management",
+    "workspace",
+    "productivity",
+    "team collaboration",
+  ],
+  openGraph: {
+    title: "Gize — Time is everything",
+    description:
+      "Multi-workspace task management app. Organize projects, track tasks in real-time, and keep your team aligned.",
+    type: "website",
+    siteName: "Gize",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({
