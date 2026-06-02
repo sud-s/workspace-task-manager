@@ -1,12 +1,14 @@
 "use client"
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import type { UseQueryResult, UseMutationResult } from "@tanstack/react-query"
 import { useSupabase } from "@/providers/supabase-provider"
 import { getWorkspaces, getWorkspace } from "@/lib/queries"
 import { createWorkspace, updateWorkspace, deleteWorkspace } from "@/lib/mutations"
+import type { WorkspaceRow } from "@/lib/queries"
 import { toast } from "sonner"
 
-export function useWorkspaces() {
+export function useWorkspaces(): UseQueryResult<WorkspaceRow[]> {
   const supabase = useSupabase()
 
   return useQuery({
@@ -15,7 +17,7 @@ export function useWorkspaces() {
   })
 }
 
-export function useWorkspace(id: string) {
+export function useWorkspace(id: string): UseQueryResult<WorkspaceRow | null> {
   const supabase = useSupabase()
 
   return useQuery({
@@ -25,7 +27,7 @@ export function useWorkspace(id: string) {
   })
 }
 
-export function useCreateWorkspace() {
+export function useCreateWorkspace(): UseMutationResult<WorkspaceRow, Error, string> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 
@@ -41,7 +43,11 @@ export function useCreateWorkspace() {
   })
 }
 
-export function useUpdateWorkspace() {
+export function useUpdateWorkspace(): UseMutationResult<
+  WorkspaceRow,
+  Error,
+  { id: string; name: string }
+> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 
@@ -59,7 +65,7 @@ export function useUpdateWorkspace() {
   })
 }
 
-export function useDeleteWorkspace() {
+export function useDeleteWorkspace(): UseMutationResult<void, Error, string> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 

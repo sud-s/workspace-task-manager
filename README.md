@@ -30,7 +30,41 @@
 
 ---
 
-## Quick Start
+## Submission
+
+| | |
+|---|---|
+| **Candidate** | Sud (sud-s) |
+| **Start** | 2026-06-01 09:00 EAT |
+| **End** | 2026-06-02 17:30 EAT |
+| **Live URL** | [https://gize-pi.vercel.app](https://gize-pi.vercel.app) |
+| **Repository** | [sud-s/workspace-task-manager](https://github.com/sud-s/workspace-task-manager) |
+| **Stack** | Next.js 16 (App Router) + Supabase (PostgreSQL, RLS, Realtime, Auth) + Express backend (Render) |
+
+### Architectural Decisions
+
+- **TanStack Query** for all data fetching (not `useEffect`) — cache invalidation, optimistic updates, deduplication
+- **Zustand** for global state (current workspace ID) — minimal boilerplate vs Redux/Context
+- **Supabase Realtime** for live task sync — direct React Query cache updates on INSERT/UPDATE/DELETE (no refetch)
+- **Edge Function over Express** for overdue tasks — deployed to Supabase, avoids Render roundtrip, uses `SUPABASE_SERVICE_ROLE_KEY` for assignee name enrichment
+- **RLS on all operations** — 4 policies per table (SELECT/INSERT/UPDATE/DELETE), all via `is_workspace_member()`
+- **Dark-first theme** — CSS variables compatible with shadcn/ui; no separate light mode
+- **Route allowlist** — `isPublicRoute()` in middleware rather than UUID-regex protected matches; covers arbitrary paths
+
+### Known Issues / What's Not Working
+
+- The project can't build locally due to ENOSPC (disk space), but builds on Vercel
+- No dark/light theme toggle (nice-to-have)
+- No Kanban board (nice-to-have)
+- No calendar view (nice-to-have)
+- Supabase CLI unavailable on Windows (`win32-x64` binary missing) — Edge Function deployed via Management API (Python)
+- Domain `gize.vercel.app` owned by another Vercel team — using `gize-pi.vercel.app`
+- No email notifications
+
+---
+
+<details>
+<summary>Quickstart</summary>
 
 **Prerequisites:** Node.js 22+, a Supabase project
 
@@ -58,6 +92,8 @@ npm install
 cp .env.example .env
 npm run dev
 ```
+
+</details>
 
 ---
 

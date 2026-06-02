@@ -1,12 +1,14 @@
 "use client"
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import type { UseQueryResult, UseMutationResult } from "@tanstack/react-query"
 import { useSupabase } from "@/providers/supabase-provider"
 import { getProjects, getProject } from "@/lib/queries"
 import { createProject } from "@/lib/mutations"
+import type { ProjectWithCounts, ProjectRow } from "@/lib/queries"
 import { toast } from "sonner"
 
-export function useProjects(workspaceId: string) {
+export function useProjects(workspaceId: string): UseQueryResult<ProjectWithCounts[]> {
   const supabase = useSupabase()
 
   return useQuery({
@@ -16,7 +18,7 @@ export function useProjects(workspaceId: string) {
   })
 }
 
-export function useProject(id: string) {
+export function useProject(id: string): UseQueryResult<ProjectRow | null> {
   const supabase = useSupabase()
 
   return useQuery({
@@ -26,7 +28,11 @@ export function useProject(id: string) {
   })
 }
 
-export function useCreateProject() {
+export function useCreateProject(): UseMutationResult<
+  ProjectRow,
+  Error,
+  { workspaceId: string; name: string }
+> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 

@@ -1,9 +1,12 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
+import type { UseQueryResult } from "@tanstack/react-query"
 import { createClient } from "@/lib/supabase/client"
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? "https://gize-backend.onrender.com"
+const EDGE_FUNCTION_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/overdue-tasks`
+  : "https://bfnynfufkrybpffjtunm.supabase.co/functions/v1/overdue-tasks"
 
 type OverdueTask = {
   id: string
@@ -16,7 +19,7 @@ type OverdueResponse = {
   tasks: OverdueTask[]
 }
 
-export function useOverdueTasks(projectId: string) {
+export function useOverdueTasks(projectId: string): UseQueryResult<OverdueTask[]> {
   return useQuery({
     queryKey: ["overdue-tasks", projectId],
     queryFn: async () => {
@@ -24,7 +27,7 @@ export function useOverdueTasks(projectId: string) {
       const { data: session } = await supabase.auth.getSession()
       const token = session?.session?.access_token
 
-      const response = await fetch(`${BACKEND_URL}/api/overdue`, {
+      const response = await fetch(EDGE_FUNCTION_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

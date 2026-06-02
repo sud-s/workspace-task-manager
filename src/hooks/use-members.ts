@@ -1,13 +1,15 @@
 "use client"
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import type { UseQueryResult, UseMutationResult } from "@tanstack/react-query"
 import { useSupabase } from "@/providers/supabase-provider"
 import { getWorkspaceMembers } from "@/lib/queries"
 import { inviteMember, removeMember } from "@/lib/mutations"
+import type { WorkspaceMemberRow } from "@/lib/queries"
 import type { WorkspaceRole } from "@/lib/constants"
 import { toast } from "sonner"
 
-export function useWorkspaceMembers(workspaceId: string) {
+export function useWorkspaceMembers(workspaceId: string): UseQueryResult<WorkspaceMemberRow[]> {
   const supabase = useSupabase()
 
   return useQuery({
@@ -17,7 +19,11 @@ export function useWorkspaceMembers(workspaceId: string) {
   })
 }
 
-export function useInviteMember() {
+export function useInviteMember(): UseMutationResult<
+  void,
+  Error,
+  { workspaceId: string; email: string; role: WorkspaceRole }
+> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 
@@ -43,7 +49,11 @@ export function useInviteMember() {
   })
 }
 
-export function useRemoveMember() {
+export function useRemoveMember(): UseMutationResult<
+  void,
+  Error,
+  { workspaceId: string; userId: string }
+> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 

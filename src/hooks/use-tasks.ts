@@ -1,6 +1,7 @@
 "use client"
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import type { UseQueryResult, UseMutationResult } from "@tanstack/react-query"
 import { useSupabase } from "@/providers/supabase-provider"
 import { getTasks, getTask } from "@/lib/queries"
 import { createTask, updateTask, deleteTask, updateTaskStatus } from "@/lib/mutations"
@@ -9,7 +10,7 @@ import type { CreateTaskData, UpdateTaskData } from "@/lib/mutations"
 import type { TaskStatus } from "@/lib/constants"
 import { toast } from "sonner"
 
-export function useTasks(projectId: string, filters?: TaskFilters) {
+export function useTasks(projectId: string, filters?: TaskFilters): UseQueryResult<TaskRow[]> {
   const supabase = useSupabase()
 
   return useQuery({
@@ -19,7 +20,7 @@ export function useTasks(projectId: string, filters?: TaskFilters) {
   })
 }
 
-export function useTask(taskId: string) {
+export function useTask(taskId: string): UseQueryResult<TaskRow | null> {
   const supabase = useSupabase()
 
   return useQuery({
@@ -29,7 +30,11 @@ export function useTask(taskId: string) {
   })
 }
 
-export function useCreateTask() {
+export function useCreateTask(): UseMutationResult<
+  TaskRow,
+  Error,
+  { projectId: string; data: CreateTaskData }
+> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 
@@ -51,7 +56,11 @@ export function useCreateTask() {
   })
 }
 
-export function useUpdateTask() {
+export function useUpdateTask(): UseMutationResult<
+  TaskRow,
+  Error,
+  { taskId: string; data: UpdateTaskData }
+> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 
@@ -69,7 +78,11 @@ export function useUpdateTask() {
   })
 }
 
-export function useDeleteTask() {
+export function useDeleteTask(): UseMutationResult<
+  { pid: string },
+  Error,
+  { taskId: string; projectId: string }
+> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 
@@ -91,7 +104,12 @@ export function useDeleteTask() {
   })
 }
 
-export function useUpdateTaskStatus() {
+export function useUpdateTaskStatus(): UseMutationResult<
+  TaskRow,
+  Error,
+  { taskId: string; status: TaskStatus; projectId: string },
+  { previousTasks: TaskRow[] | undefined }
+> {
   const supabase = useSupabase()
   const queryClient = useQueryClient()
 
