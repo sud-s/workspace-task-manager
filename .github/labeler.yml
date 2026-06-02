@@ -11,7 +11,7 @@
 "infra":
   - .github/**/*
   - Dockerfile
-  - render.yaml
+  - config/render.yaml
 
 "dependencies":
   - package.json
@@ -19,5 +19,5 @@
   - backend/package.json
 
 "docs":
-  - "*.md"
+  - docs/*.md
   - assets/*

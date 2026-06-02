@@ -237,8 +237,10 @@ SECURITY DEFINER
 SET search_path = ''
 AS $$
 BEGIN
-  INSERT INTO public.workspace_members (workspace_id, user_id, role)
-  VALUES (NEW.id, auth.uid(), 'owner');
+  IF auth.uid() IS NOT NULL THEN
+    INSERT INTO public.workspace_members (workspace_id, user_id, role)
+    VALUES (NEW.id, auth.uid(), 'owner');
+  END IF;
   RETURN NEW;
 END;
 $$;

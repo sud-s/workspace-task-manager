@@ -50,54 +50,58 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
           )}
         </Link>
 
-        <Separator className="my-3 bg-border/50" />
+        {currentWorkspaceId && (
+          <>
+            <Separator className="my-3 bg-border/50" />
 
-        <div className="flex items-center justify-between px-3 py-1.5">
-          <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-            Projects
-          </span>
-          <CreateProjectDialog workspaceId={currentWorkspaceId ?? ""}>
-            <Button variant="ghost" size="icon" className="h-6 w-6 text-muted-foreground hover:text-card-foreground hover:bg-accent">
-              <Plus className="h-3.5 w-3.5" />
-            </Button>
-          </CreateProjectDialog>
-        </div>
+            <div className="flex items-center justify-between px-3 py-1.5">
+              <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+                Projects
+              </span>
+              <CreateProjectDialog workspaceId={currentWorkspaceId}>
+                <Button variant="ghost" size="icon" className="h-6 w-6 text-muted-foreground hover:text-card-foreground hover:bg-accent">
+                  <Plus className="h-3.5 w-3.5" />
+                </Button>
+              </CreateProjectDialog>
+            </div>
 
-        {isLoading ? (
-          <div className="space-y-1.5 px-1">
-            <Skeleton className="h-9 w-full bg-accent" />
-            <Skeleton className="h-9 w-full bg-accent" />
-          </div>
-        ) : projects && projects.length > 0 ? (
-          <div className="space-y-0.5 px-1">
-            {projects.map((project) => {
-              const isActive = pathname.includes(project.id)
-              return (
-                <Link
-                  key={project.id}
-                  href={`/${currentWorkspaceId}/projects/${project.id}`}
-                  onClick={onNavClick}
-                  className={`group flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-all ${
-                    isActive
-                      ? "bg-accent/60 text-accent-foreground font-medium"
-                      : "text-muted-foreground hover:text-card-foreground hover:bg-accent/40"
-                  }`}
-                >
-                  <span className={`h-1.5 w-1.5 shrink-0 rounded-full transition-all ${
-                    isActive ? "bg-emerald-400 shadow-sm shadow-emerald-400/30" : "bg-muted-foreground/40 group-hover:bg-muted-foreground/60"
-                  }`} />
-                  <span className="truncate">{project.name}</span>
-                  {isActive && (
-                    <span className="ml-auto h-1 w-1 rounded-full bg-emerald-400/50" />
-                  )}
-                </Link>
-              )
-            })}
-          </div>
-        ) : (
-          <p className="px-4 py-3 text-xs text-muted-foreground">
-            No projects yet
-          </p>
+            {isLoading ? (
+              <div className="space-y-1.5 px-1">
+                <Skeleton className="h-9 w-full bg-accent" />
+                <Skeleton className="h-9 w-full bg-accent" />
+              </div>
+            ) : projects && projects.length > 0 ? (
+              <div className="space-y-0.5 px-1">
+                {projects.map((project) => {
+                  const isActive = pathname.includes(project.id)
+                  return (
+                    <Link
+                      key={project.id}
+                      href={`/${currentWorkspaceId}/projects/${project.id}`}
+                      onClick={onNavClick}
+                      className={`group flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-all ${
+                        isActive
+                          ? "bg-accent/60 text-accent-foreground font-medium"
+                          : "text-muted-foreground hover:text-card-foreground hover:bg-accent/40"
+                      }`}
+                    >
+                      <span className={`h-1.5 w-1.5 shrink-0 rounded-full transition-all ${
+                        isActive ? "bg-emerald-400 shadow-sm shadow-emerald-400/30" : "bg-muted-foreground/40 group-hover:bg-muted-foreground/60"
+                      }`} />
+                      <span className="truncate">{project.name}</span>
+                      {isActive && (
+                        <span className="ml-auto h-1 w-1 rounded-full bg-emerald-400/50" />
+                      )}
+                    </Link>
+                  )
+                })}
+              </div>
+            ) : (
+              <p className="px-4 py-3 text-xs text-muted-foreground">
+                No projects yet
+              </p>
+            )}
+          </>
         )}
 
         <Separator className="my-3 bg-border/50" />
