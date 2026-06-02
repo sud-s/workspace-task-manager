@@ -7,12 +7,12 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex h-screen overflow-hidden bg-zinc-950">
+    <div className="flex h-screen overflow-hidden bg-background">
       <div className="pointer-events-none fixed inset-0 bg-grid-white z-0" />
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(ellipse_at_top_left,_hsl(142_76%_46%_/_0.04),transparent_50%)] z-0" />
       <Sidebar />
       <div className="relative z-10 flex flex-1 flex-col min-w-0">
-        <header className="flex h-14 items-center justify-between gap-4 border-b border-zinc-800/50 bg-zinc-950/80 px-4 sm:px-6 backdrop-blur-xl">
+        <header className="flex h-14 items-center justify-between gap-4 border-b border-border/50 bg-background/80 px-4 sm:px-6 backdrop-blur-xl">
           <div className="flex items-center gap-2">
             <MobileSidebar />
           </div>

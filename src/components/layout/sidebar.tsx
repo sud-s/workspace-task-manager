@@ -27,20 +27,20 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
         <WorkspaceSwitcher />
       </div>
 
-      <Separator className="bg-zinc-800/50" />
+      <Separator className="bg-border/50" />
 
       <nav className="flex-1 space-y-1 p-3">
         <Link
           href={workspacePath}
           onClick={onNavClick}
-          className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-zinc-800/60 hover:text-white ${
+          className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent/60 hover:text-accent-foreground ${
             pathname === workspacePath
-              ? "bg-zinc-800/60 text-white shadow-sm"
-              : "text-zinc-400"
+              ? "bg-accent/60 text-accent-foreground shadow-sm"
+              : "text-muted-foreground"
           }`}
         >
           <Home className={`h-4 w-4 transition-all ${
-            pathname === workspacePath ? "text-emerald-400" : "text-zinc-500 group-hover:text-zinc-300"
+            pathname === workspacePath ? "text-emerald-400" : "text-muted-foreground group-hover:text-card-foreground"
           }`} />
           Dashboard
           {pathname === workspacePath && (
@@ -48,14 +48,14 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
           )}
         </Link>
 
-        <Separator className="my-3 bg-zinc-800/50" />
+        <Separator className="my-3 bg-border/50" />
 
         <div className="flex items-center justify-between px-3 py-1.5">
           <span className="text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
             Projects
           </span>
           <CreateProjectDialog workspaceId={currentWorkspaceId ?? ""}>
-            <Button variant="ghost" size="icon" className="h-6 w-6 text-zinc-500 hover:text-white hover:bg-zinc-800">
+            <Button variant="ghost" size="icon" className="h-6 w-6 text-muted-foreground hover:text-card-foreground hover:bg-accent">
               <Plus className="h-3.5 w-3.5" />
             </Button>
           </CreateProjectDialog>
@@ -63,8 +63,8 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
 
         {isLoading ? (
           <div className="space-y-1.5 px-1">
-            <Skeleton className="h-9 w-full bg-zinc-800/50" />
-            <Skeleton className="h-9 w-full bg-zinc-800/50" />
+            <Skeleton className="h-9 w-full bg-accent" />
+            <Skeleton className="h-9 w-full bg-accent" />
           </div>
         ) : projects && projects.length > 0 ? (
           <div className="space-y-0.5 px-1">
@@ -77,12 +77,12 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
                   onClick={onNavClick}
                   className={`group flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-all ${
                     isActive
-                      ? "bg-zinc-800/60 text-white font-medium"
-                      : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40"
+                      ? "bg-accent/60 text-accent-foreground font-medium"
+                      : "text-muted-foreground hover:text-card-foreground hover:bg-accent/40"
                   }`}
                 >
                   <span className={`h-1.5 w-1.5 shrink-0 rounded-full transition-all ${
-                    isActive ? "bg-emerald-400 shadow-sm shadow-emerald-400/30" : "bg-zinc-600 group-hover:bg-zinc-500"
+                    isActive ? "bg-emerald-400 shadow-sm shadow-emerald-400/30" : "bg-muted-foreground/40 group-hover:bg-muted-foreground/60"
                   }`} />
                   <span className="truncate">{project.name}</span>
                   {isActive && (
@@ -93,24 +93,24 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
             })}
           </div>
         ) : (
-          <p className="px-4 py-3 text-xs text-zinc-500">
+          <p className="px-4 py-3 text-xs text-muted-foreground">
             No projects yet
           </p>
         )}
 
-        <Separator className="my-3 bg-zinc-800/50" />
+        <Separator className="my-3 bg-border/50" />
 
         <Link
           href={currentWorkspaceId ? `/${currentWorkspaceId}/members` : "#"}
           onClick={onNavClick}
-          className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-zinc-800/60 hover:text-white ${
+          className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent/60 hover:text-accent-foreground ${
             pathname.includes("/members")
-              ? "bg-zinc-800/60 text-white shadow-sm"
-              : "text-zinc-400"
+              ? "bg-accent/60 text-accent-foreground shadow-sm"
+              : "text-muted-foreground"
           }`}
         >
           <Users className={`h-4 w-4 transition-all ${
-            pathname.includes("/members") ? "text-emerald-400" : "text-zinc-500 group-hover:text-zinc-300"
+            pathname.includes("/members") ? "text-emerald-400" : "text-muted-foreground group-hover:text-card-foreground"
           }`} />
           Members
           {pathname.includes("/members") && (
@@ -121,14 +121,14 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
         <Link
           href={currentWorkspaceId ? `/${currentWorkspaceId}/settings` : "#"}
           onClick={onNavClick}
-          className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-zinc-800/60 hover:text-white ${
+          className={`group flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-accent/60 hover:text-accent-foreground ${
             pathname.includes("/settings")
-              ? "bg-zinc-800/60 text-white shadow-sm"
-              : "text-zinc-400"
+              ? "bg-accent/60 text-accent-foreground shadow-sm"
+              : "text-muted-foreground"
           }`}
         >
           <Settings className={`h-4 w-4 transition-all ${
-            pathname.includes("/settings") ? "text-emerald-400" : "text-zinc-500 group-hover:text-zinc-300"
+            pathname.includes("/settings") ? "text-emerald-400" : "text-muted-foreground group-hover:text-card-foreground"
           }`} />
           Settings
           {pathname.includes("/settings") && (
@@ -137,9 +137,9 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
         </Link>
       </nav>
 
-      <div className="border-t border-zinc-800/50 p-3 flex items-center gap-2">
+      <div className="border-t border-border/50 p-3 flex items-center gap-2">
         <CreateWorkspaceDialog>
-          <button className="flex flex-1 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-400 transition-all hover:bg-zinc-800/60 hover:text-white">
+          <button className="flex flex-1 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-all hover:bg-accent/60 hover:text-accent-foreground">
             <Plus className="h-4 w-4" />
             New Workspace
           </button>
@@ -152,7 +152,7 @@ function SidebarContent({ onNavClick }: { onNavClick?: () => void }) {
 
 export function Sidebar() {
   return (
-    <aside className="hidden lg:flex h-full w-64 flex-col border-r border-zinc-800/50 bg-zinc-900/40 backdrop-blur-xl">
+    <aside className="hidden lg:flex h-full w-64 flex-col border-r border-border/50 bg-card/40 backdrop-blur-xl">
       <SidebarContent />
     </aside>
   )
@@ -176,7 +176,7 @@ export function MobileSidebar() {
         variant="ghost"
         size="icon"
         onClick={() => setOpen(true)}
-        className="lg:hidden h-9 w-9 text-zinc-400 hover:text-white"
+        className="lg:hidden h-9 w-9 text-muted-foreground hover:text-card-foreground"
       >
         <Menu className="h-5 w-5" />
       </Button>
@@ -186,14 +186,14 @@ export function MobileSidebar() {
             className="fixed inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 w-72 bg-zinc-950 border-r border-zinc-800/50 shadow-2xl" style={{ animation: "slide-up 0.2s ease-out" }}>
+          <div             className="fixed inset-y-0 left-0 w-72 bg-background border-r border-border/50 shadow-2xl" style={{ animation: "slide-up 0.2s ease-out" }}>
             <div className="flex h-full flex-col">
               <div className="flex items-center justify-end p-2">
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => setOpen(false)}
-                  className="h-8 w-8 text-zinc-400 hover:text-white"
+                  className="h-8 w-8 text-muted-foreground hover:text-card-foreground"
                 >
                   <X className="h-4 w-4" />
                 </Button>

@@ -34,7 +34,7 @@ export function UserNav() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-9 w-9 rounded-full">
-          <Avatar className="h-9 w-9 ring-2 ring-zinc-800 ring-offset-2 ring-offset-background">
+          <Avatar className="h-9 w-9 ring-2 ring-border ring-offset-2 ring-offset-background">
             <AvatarFallback className="text-xs bg-gradient-to-br from-emerald-500 to-emerald-600 text-white font-semibold">
               {initial.toUpperCase()}
             </AvatarFallback>

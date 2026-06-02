@@ -52,6 +52,32 @@
   --border: hsl(240 6% 85%);
   --input: hsl(240 6% 85%);
   --ring: hsl(142 60% 40%);
+
+  --color-zinc-950: hsl(0 0% 100%);
+  --color-zinc-900: hsl(0 0% 98%);
+  --color-zinc-800: hsl(240 6% 90%);
+  --color-zinc-700: hsl(240 5% 84%);
+  --color-zinc-600: hsl(240 5% 65%);
+  --color-zinc-500: hsl(240 4% 46%);
+  --color-zinc-400: hsl(240 5% 34%);
+  --color-zinc-300: hsl(240 4% 26%);
+  --color-zinc-200: hsl(240 6% 20%);
+  --color-zinc-100: hsl(240 6% 10%);
+  --color-zinc-50: hsl(240 10% 4%);
+  
+  --color-emerald-400: hsl(142 60% 40%);
+  --color-emerald-500: hsl(142 60% 40%);
+  --color-emerald-600: hsl(142 60% 35%);
+  --color-emerald-900: hsl(142 60% 25%);
+  
+  --color-red-400: hsl(0 72% 46%);
+  --color-red-500: hsl(0 72% 46%);
+  --color-red-900: hsl(0 72% 30%);
+  
+  --color-amber-400: hsl(38 92% 45%);
+  --color-amber-500: hsl(38 92% 45%);
+  
+  --color-amber-900: hsl(38 92% 25%);
 }
 
 @theme inline {
