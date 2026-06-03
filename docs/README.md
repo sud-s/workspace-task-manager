@@ -34,8 +34,8 @@
 | | |
 |---|---|
 | **Candidate** | Sud (sud-s) |
-| **Start** | 2026-06-01 09:00 EAT |
-| **End** | 2026-06-02 17:30 EAT |
+| **Start** | 2026-06-02 07:00 AM EAT |
+| **End** | 2026-06-03 03:00 AM EAT |
 | **Live URL** | [https://gize-pi.vercel.app](https://gize-pi.vercel.app) |
 | **Repository** | [sud-s/workspace-task-manager](https://github.com/sud-s/workspace-task-manager) |
 | **Stack** | Next.js 16 + Supabase (PostgreSQL, RLS, Realtime, Auth) |
